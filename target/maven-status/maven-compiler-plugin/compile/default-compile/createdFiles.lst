@@ -1,2 +1,9 @@
+Servlets\InicioSeccionSv.class
+Controlador\ControladorDeTareas.class
+Controlador\main.class
+Modelo\Usuario.class
 com\mycompany\tareas\JAXRSConfiguration.class
 com\mycompany\tareas\resources\JavaEE8Resource.class
+Servlets\RegistratSv.class
+Controlador\ControladorDeUsuarios.class
+Modelo\Tarea.class

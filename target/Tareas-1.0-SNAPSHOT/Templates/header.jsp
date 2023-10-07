@@ -4,6 +4,10 @@
 
 <!-- Enlazar archivos de BootStrap, establecer condiciones base y abrir etiquetas base -->
 <!-- Nombrar Proyecto -->
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Tarea"%>
+<%@page import="Controlador.ControladorDeTareas"%>
+<%@page import="Controlador.ControladorDeUsuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
