@@ -1,0 +1,55 @@
+@options
+@packages
+-classpath
+'C:/Users/ADRIAN CASTILLO/.m2/repository/javax/javaee-api/8.0/javaee-api-8.0.jar;C:/Users/ADRIAN CASTILLO/.m2/repository/com/sun/mail/javax.mail/1.6.0/javax.mail-1.6.0.jar;C:/Users/ADRIAN CASTILLO/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'C:/Users/ADRIAN CASTILLO/Documents/Umariana/Cuarto Semestre/Estructuras de Datos I/CORTE 2/Tareas/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/ADRIAN CASTILLO/Documents/Umariana/Cuarto Semestre/Estructuras de Datos I/CORTE 2/Tareas/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Tareas-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/ADRIAN CASTILLO/Documents/Umariana/Cuarto Semestre/Estructuras de Datos I/CORTE 2/Tareas/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Tareas-1.0-SNAPSHOT 1.0-SNAPSHOT API'
+com.mycompany.tareas
+com.mycompany.tareas.resources
+Controlador
+Modelo
+Servlets
+C:\Users\ADRIAN CASTILLO\.m2\repository\javax\javaee-api\8.0\javaee-api-8.0.jar = 1695439683884
+C:\Users\ADRIAN CASTILLO\.m2\repository\com\sun\mail\javax.mail\1.6.0\javax.mail-1.6.0.jar = 1695438242122
+C:\Users\ADRIAN CASTILLO\.m2\repository\javax\activation\activation\1.1\activation-1.1.jar = 1695438237190
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\src\main\java = 1696601640697
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\allclasses-index.html = 1696694654744
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\allpackages-index.html = 1696694654749
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\element-list = 1696694654507
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\help-doc.html = 1696694654805
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\index-all.html = 1696694654793
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\index.html = 1696694654718
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\jquery-ui.overrides.css = 1696694654841
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\member-search-index.js = 1696694654758
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\module-search-index.js = 1696694654751
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\overview-summary.html = 1696694654797
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\overview-tree.html = 1696694654712
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\package-search-index.js = 1696694654754
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\script.js = 1696694654812
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\search.js = 1696694654817
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\serialized-form.html = 1696694654609
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\stylesheet.css = 1696694654809
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\tag-search-index.js = 1696694654760
+C:\Users\ADRIAN CASTILLO\Documents\Umariana\Cuarto Semestre\Estructuras de Datos I\CORTE 2\Tareas\target\site\apidocs\type-search-index.js = 1696694654756
