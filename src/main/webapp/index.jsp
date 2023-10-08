@@ -18,9 +18,9 @@
 			</div>
 			<span>O utiliza tu correo electrónico para registrarte</span>
                         <input type="text" placeholder="Cedula" name="cedula" />
-                        <input type="text" placeholder="Correo electronico" name="correo" />
+                        <input type="email" placeholder="Correo electronico" name="correo" />
 			<input type="password" placeholder="Contraseña" name="contrasena" />
-			<button>Registrar</button>
+                        <button type="submit">Registrar</button>
 		</form>
 	</div>    
 	<div class="form-container sign-in-container">
@@ -38,7 +38,7 @@
                         <input type="password" placeholder="Contraseña" name="contrasena" />
                         <a href="Principal.jsp">Olvidaste tu contraseña?</a>
                         
-			<button><a href="Principal.jsp"> Iniciar sesión</a></button>
+                        <button type="submit"> Iniciar sesión</button>
 		</form>
 	</div>
 	<div class="overlay-container">

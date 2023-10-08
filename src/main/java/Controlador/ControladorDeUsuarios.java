@@ -23,14 +23,14 @@ import java.util.ArrayList;
 public class ControladorDeUsuarios extends ControladorArchivos {
 
     // Lista de usuarios gestionados por el controlador.
-    private ArrayList<Usuario> listaUsuarios;
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     /**
      * Constructor de la clase ControladorDeUsuarios. Inicializa la lista de
      * usuarios cargando los datos desde el archivo de usuarios.
      */
     public ControladorDeUsuarios() {
-        listaUsuarios = leerListaUsuarios();
+        
     }
 
     /**
@@ -44,7 +44,6 @@ public class ControladorDeUsuarios extends ControladorArchivos {
     public boolean agregarUsuario(Usuario usuario) {
         if (usuario != null) {
             listaUsuarios.add(usuario);
-            guardarListaUsuarios(listaUsuarios);
             return true;
         }
         return false;
@@ -65,7 +64,7 @@ public class ControladorDeUsuarios extends ControladorArchivos {
             if (us.getCedula() == id) {
                 us.setNombreUsuario(nuevoUsuario.getNombreUsuario());
                 us.setContrasena(nuevoUsuario.getContrasena());
-                guardarListaUsuarios(listaUsuarios); // Actualizar el archivo con la lista actualizada
+                
                 return true;
             }
 
@@ -86,7 +85,7 @@ public class ControladorDeUsuarios extends ControladorArchivos {
         for (Usuario us : listaUsuarios) {
             if (us.getCedula() == id) {
                 listaUsuarios.remove(us);
-                guardarListaUsuarios(listaUsuarios); // Actualizar el archivo con la lista actualizada
+                
                 return true;
             }
 

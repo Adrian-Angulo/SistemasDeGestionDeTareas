@@ -25,7 +25,7 @@ public class ControladorDeTareas extends ControladorArchivos{
     private int nextId;
 
     public ControladorDeTareas() {
-        listaTareas = leerListaTareas();
+        
         nextId = obtenerSiguienteId();
     }
 
@@ -96,7 +96,7 @@ public class ControladorDeTareas extends ControladorArchivos{
                 tarea.setId(id); // Asignar el ID a la tarea
 
                 listaTareas.add(tarea);  // Agregar la tarea a la lista de tareas
-                guardarListaTareas(listaTareas); // Guardar la lista actualizada en el archivo
+                
                 return true; // Devolver true para indicar que la tarea se agregó con éxito
 
             }
@@ -125,7 +125,7 @@ public class ControladorDeTareas extends ControladorArchivos{
                 tarea.setFechaDeVencimiento(nuevaTarea.getFechaDeVencimiento());
 
                 // Guardar la lista actualizada en el archivo
-                guardarListaTareas(listaTareas);
+                
 
                 // Devolver true para indicar que la tarea se actualizó con éxito
                 return true;
@@ -152,7 +152,7 @@ public class ControladorDeTareas extends ControladorArchivos{
                 listaTareas.remove(t);
 
                 // Guardar la lista actualizada en el archivo
-                guardarListaTareas(listaTareas);
+                
 
                 // Devolver true para indicar que la tarea se eliminó con éxito
                 return true;

@@ -4,6 +4,7 @@
  */
 package Servlets;
 
+import Controlador.ControladorArchivos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Modelo.Usuario;
 import Controlador.ControladorDeUsuarios;
+import java.util.ArrayList;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -23,6 +26,7 @@ public class RegistratSv extends HttpServlet {
 
     Usuario usuario = new Usuario();
     ControladorDeUsuarios usuarioCont = new ControladorDeUsuarios();
+    ControladorArchivos archivos = new ControladorArchivos();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,23 +69,50 @@ public class RegistratSv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String cc = request.getParameter("cedula");
-        String nombreUsuario = request.getParameter("usuario");
-        String contrasena = request.getParameter("contrasena");
-        
         try {
-            Usuario usuario = new Usuario(Integer.parseInt(cc), nombreUsuario, contrasena);
-        } catch (Exception e) {
-            System.out.println("Error al crear el usuario"+e);
-        }
+            // Obtener los parámetros de la solicitud y validarlos
+            String cedulaParam = request.getParameter("cedula");
+            String nombreUsuarioParam = request.getParameter("correo");
+            String contrasenaParam = request.getParameter("contrasena");
 
-        if (usuarioCont.agregarUsuario(usuario)) {
-            System.out.println("El usuario a sido agregado");
+            if (cedulaParam == null || nombreUsuarioParam == null || contrasenaParam == null) {
+                throw new IllegalArgumentException("Los parámetros de la solicitud son incorrectos.");
+            }
+
+            int cedula = Integer.parseInt(cedulaParam);
+
+            // Crear un objeto Usuario con los datos validados
+            Usuario usuario = new Usuario(cedula, nombreUsuarioParam, contrasenaParam);
+
+            // Acceder a la lista de usuarios desde el contexto de la aplicación
+            ServletContext context = getServletContext();
+            ArrayList<Usuario> listaUsuarios = archivos.leerListaUsuarios(context);
+            
+
+            if (listaUsuarios == null) {
+                listaUsuarios = new ArrayList<>();
+            }
+
+            // Agregar el nuevo usuario a la lista
+            listaUsuarios.add(usuario);
+            usuarioCont.setListaUsuarios(listaUsuarios);
+            archivos.guardarListaUsuarios(listaUsuarios, context);
+            
+
+            // Guardar la lista actualizada de usuarios en el contexto de la aplicación
+            context.setAttribute("listaUsuarios", listaUsuarios);
+
+            // Redirigir al usuario a la página "index.jsp"
             response.sendRedirect("index.jsp");
-           
-        } else {
-            System.out.println("El usuario no ha sido agregado");
+        } catch (NumberFormatException e) {
+            // Manejar errores de conversión de número
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cédula inválida.");
+        } catch (IllegalArgumentException e) {
+            // Manejar errores de parámetros de solicitud incorrectos
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
+        } catch (Exception e) {
+            // Manejar otros errores
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error interno del servidor.");
         }
     }
 

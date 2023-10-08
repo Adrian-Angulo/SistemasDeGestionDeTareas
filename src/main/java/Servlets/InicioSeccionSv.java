@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controlador.ControladorDeUsuarios;
+import Controlador.ControladorArchivos;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -21,6 +23,7 @@ import Controlador.ControladorDeUsuarios;
 public class InicioSeccionSv extends HttpServlet {
 
     ControladorDeUsuarios controladorDeUsuario = new ControladorDeUsuarios();
+    ControladorArchivos archivos = new ControladorArchivos();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,18 +65,20 @@ public class InicioSeccionSv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ServletContext context = getServletContext();
+        controladorDeUsuario.setListaUsuarios(archivos.leerListaUsuarios(context));
         
-        
-        String usuario = request.getParameter("Usuario"); // recibir el usuario 
-        String contrasena = request.getParameter("Contrasena"); // recibir la contraseña 
+        String usuario = request.getParameter("correo"); // recibir el usuario 
+        String contrasena = request.getParameter("contrasena"); // recibir la contraseña 
 
-        
+        System.out.println(usuario);
+        System.out.println(contrasena);
         //validar si el usuario se encuentra encuentra registrado  para iniciar seccion para ello se llama al metodo autenticarUsuario
      
         if (controladorDeUsuario.autenticarUsuario(usuario, contrasena)) {
             
             System.out.println("El usuario a iniciado seccion");
-            response.sendRedirect("PaginaPrincipal.jsp");// si el usuariio existe se redirecciona a la pagina Principal
+            response.sendRedirect("Principal.jsp");// si el usuariio existe se redirecciona a la pagina Principal
         } else {
             
              // En caso de autenticación fallida, se configura un atributo de solicitud para mostrar un mensaje de error.
