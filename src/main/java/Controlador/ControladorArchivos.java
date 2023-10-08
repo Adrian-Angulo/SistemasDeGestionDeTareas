@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletContext;
 
 /**
  * La clase ControladorArchivos proporciona métodos para leer y guardar listas
@@ -35,8 +36,14 @@ public class ControladorArchivos {
      *
      * @param tareas La lista de tareas que se va a guardar en el archivo.
      */
-    public static void guardarListaTareas(ArrayList<Tarea> tareas) {
-        try (FileWriter fileWriter = new FileWriter("src\\main\\java\\Archivos\\tareas.txt"); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+    public static void guardarListaTareas(ArrayList<Tarea> tareas, ServletContext context) {
+        /**
+         * Establecemos la ruta
+         */
+        String ruta = "/Archivos/tareas.txt";// Nombramos la carpeta ya creada y el tipo de archivo que queremos crear -Datos conocidos
+
+        String rutaa = context.getRealPath(ruta);
+        try (FileWriter fileWriter = new FileWriter(rutaa); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
             for (Tarea tarea : tareas) {
                 bufferedWriter.write(tarea.getId() + "," + tarea.getTitulo() + ","
@@ -55,12 +62,16 @@ public class ControladorArchivos {
      * Lee la lista de tareas desde un archivo de texto y la devuelve como una
      * lista de objetos Tarea.
      *
+     * @param context
      * @return Una lista de tareas leída desde el archivo de tareas.
      */
-    public static ArrayList<Tarea> leerListaTareas() {
+    public ArrayList<Tarea> leerListaTareas(ServletContext context) {
+        String ruta = "/Archivos/tareas.txt";// Nombramos la carpeta ya creada y el tipo de archivo que queremos crear -Datos conocidos
+
+        String rutaa = context.getRealPath(ruta);
         ArrayList<Tarea> tareas = new ArrayList<>();
 
-        try (FileReader fileReader = new FileReader("src\\main\\java\\Archivos\\tareas.txt"); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (FileReader fileReader = new FileReader(rutaa); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {
@@ -90,8 +101,11 @@ public class ControladorArchivos {
      * @param listaUsuarios La lista de usuarios que se va a guardar en el
      * archivo.
      */
-    public static void guardarListaUsuarios(ArrayList<Usuario> usuario) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\main\\java\\Archivos\\tareas.txt"))) {
+    public  void guardarListaUsuarios(ArrayList<Usuario> usuario, ServletContext context) {
+        String ruta = "/Archivos/usuarios.txt";// Nombramos la carpeta ya creada y el tipo de archivo que queremos crear -Datos conocidos
+
+        String rutaa = context.getRealPath(ruta);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(rutaa))) {
 
             for (Usuario usu : usuario) {
                 bufferedWriter.write(usu.getCedula() + "," + usu.getNombreUsuario() + ","
@@ -112,10 +126,13 @@ public class ControladorArchivos {
      *
      * @return Una lista de usuarios leída desde el archivo de usuarios.
      */
-    public static ArrayList<Usuario> leerListaUsuarios() {
+    public ArrayList<Usuario> leerListaUsuarios(ServletContext context) {
+        String ruta = "/Archivos/usuarios.txt";// Nombramos la carpeta ya creada y el tipo de archivo que queremos crear -Datos conocidos
+
+        String rutaa = context.getRealPath(ruta);
         ArrayList<Usuario> listausuario = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\main\\java\\Archivos\\tareas.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(rutaa))) {
 
             String linea;
             while ((linea = bufferedReader.readLine()) != null) {
