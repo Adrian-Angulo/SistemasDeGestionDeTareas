@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="estilos/style.css">
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+            <form action="RegistratSv" method="POST">
 			<h1>Registrate</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -17,15 +17,15 @@
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>O utiliza tu correo electrónico para registrarte</span>
-			<input type="text" placeholder="Nombre" />
-			<input type="email" placeholder="Teléfono o correo electrónico" />
-			<input type="password" placeholder="Contraseña" />
-			<button>Iniciar sesión</button>
+                        <input type="text" placeholder="Cedula" name="cedula" />
+                        <input type="text" placeholder="Correo electronico" name="correo" />
+			<input type="password" placeholder="Contraseña" name="contrasena" />
+			<button>Registrar</button>
 		</form>
 	</div>    
 	<div class="form-container sign-in-container">
             <!-- redireccion con servlet -->
-		<form action="#">
+            <form action="InicioSeccionSv" method="POST">
 			<h1>Sistema de Gestión de Tareas</h1>
 			<div class="social-container">
                            
@@ -34,9 +34,9 @@
 				<a href="https://www.instagram.com/esneydrsxual/" class="social"><i class="fa-brands fa-instagram"></i></a>
 			</div>
 			<span>Usa tu cuenta</span>
-			<input type="email" placeholder="Teléfono o correo electrónico" />
-			<input type="password" placeholder="Contraseña" />
-			<a href="#">Olvidaste tu contraseña?</a>
+                        <input type="email" placeholder="correo electrónico" name="correo" />
+                        <input type="password" placeholder="Contraseña" name="contrasena" />
+                        <a href="Principal.jsp">Olvidaste tu contraseña?</a>
 			<button>Iniciar sesión</button>
 		</form>
 	</div>
@@ -50,7 +50,7 @@
 			<div class="overlay-panel overlay-right">
 				<h1>Hola, bienvenido/a!</h1>
 				<p>Ingresa tus datos personales y comienza tu viaje con nosotros.</p>
-				<button class="ghost" id="signUp">Iniciar sesión</button>
+				<button class="ghost" id="signUp">Registrarme</button>
 			</div>
 		</div>
 	</div>
