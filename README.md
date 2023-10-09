@@ -2,8 +2,8 @@
 Este es un proyecto de aplicación web desarrollado en Java que permite a los usuarios registrarse, iniciar sesión y gestionar sus tareas pendientes. Utiliza una estructura de datos de lista simplemente enlazada para almacenar y administrar las tareas de los usuarios. A continuación, se proporciona una guía sobre cómo configurar, ejecutar y ampliar este proyecto.
 # Colaboradores
 - **Adrian Camilo Castillo Angulo**
-- **Saneyder**
-- **Sofia**
+- **Esneyder Ibarra Rosero**
+- **Sofia burbano bastidas**
 
 # Uso
 ###  Registro de Usuarios
