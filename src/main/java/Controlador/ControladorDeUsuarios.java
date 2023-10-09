@@ -123,6 +123,14 @@ public class ControladorDeUsuarios extends ControladorArchivos {
         }
         return null;
     }
+    public boolean usuarioExistente(int id) {
+    for (Usuario usuario : listaUsuarios) {
+        if (usuario.getCedula() == id) {
+            return true; // El usuario ya está registrado.
+        }
+    }
+    return false; // No se encontró ningún usuario con el ID especificado.
+}
 
     /**
      * Autentica a un usuario comprobando si el nombre de usuario y la

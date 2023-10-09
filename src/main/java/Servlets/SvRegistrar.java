@@ -87,24 +87,34 @@ public class SvRegistrar extends HttpServlet {
             // Acceder a la lista de usuarios desde el contexto de la aplicación
             ServletContext context = getServletContext();
             ArrayList<Usuario> listaUsuarios = archivos.leerListaUsuarios(context);
+            usuarioCont.setListaUsuarios(listaUsuarios); //actulizamos la lista en el ControladorDeUsuarios
             
 
             if (listaUsuarios == null) {
-                listaUsuarios = new ArrayList<>();
+                listaUsuarios = new ArrayList<>(); //en caso de que el archivo no exista 
             }
 
-            // Agregar el nuevo usuario a la lista
-            listaUsuarios.add(usuario);
-            usuarioCont.setListaUsuarios(listaUsuarios);
-            archivos.guardarListaUsuarios(listaUsuarios, context);
-            
+            // Verificar si el usuario existe en la lista por medio de su Cedula
+            if(usuarioCont.usuarioExistente(usuario.getCedula())){
+                System.out.println("El usuario ya existe");
+                request.getSession().setAttribute("registroExitoso", false); //retornar atributo de exitencia
+                response.sendRedirect("index.jsp"); //redireccionar la pagina
+                
+                //Encaso que no exista un usuario con el mismo numero de cedula registrar usuario como nuevo
+            }else{
+                
+                listaUsuarios.add(usuario); //agregar el usuario a la lista
+                usuarioCont.setListaUsuarios(listaUsuarios); //actualizar la lista de controlador usuario
+                archivos.guardarListaUsuarios(listaUsuarios, context); //actualizar la lista en el archivo
 
-            // Guardar la lista actualizada de usuarios en el contexto de la aplicación
-            context.setAttribute("listaUsuarios", listaUsuarios);
-            // Después de agregar el usuario a la lista y antes de redirigir
-            request.getSession().setAttribute("registroExitoso", true);
-            // Redirigir al usuario a la página "index.jsp"
-            response.sendRedirect("index.jsp");
+                // Guardar la lista actualizada de usuarios en el contexto de la aplicación
+                context.setAttribute("listaUsuarios", listaUsuarios);
+                // Después de agregar el usuario a la lista y antes de redirigir
+                request.getSession().setAttribute("registroExitoso", true);
+                // Redirigir al usuario a la página "index.jsp"
+                response.sendRedirect("index.jsp");
+            }
+            
 
         } catch (NumberFormatException e) {
             // Manejar errores de conversión de número
