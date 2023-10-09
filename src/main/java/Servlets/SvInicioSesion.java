@@ -81,12 +81,12 @@ public class SvInicioSesion extends HttpServlet {
             response.sendRedirect("Principal.jsp");// si el usuariio existe se redirecciona a la pagina Principal
         } else {
             
-             // En caso de autenticación fallida, se configura un atributo de solicitud para mostrar un mensaje de error.
-            request.setAttribute("validarUsuario", true); 
-            
-            // Se redirecciona de nuevo a la página de inicio (index.jsp) con el mensaje de error.
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+         // Si el inicio de sesión falla, configura el atributo de solicitud "inicioSesionFallido"
+        request.setAttribute("inicioSesionFallido", true);
+        // Redirigir de nuevo a la página de inicio (index.jsp) con el mensaje de error
+        request.getRequestDispatcher("index.jsp").forward(request, response);
         }
+        
     }
 
     /**
