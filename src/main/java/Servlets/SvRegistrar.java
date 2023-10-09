@@ -21,8 +21,8 @@ import javax.servlet.ServletContext;
  *
  * @author ADRIAN CASTILLO
  */
-@WebServlet(name = "RegistratSv", urlPatterns = {"/RegistratSv"})
-public class RegistratSv extends HttpServlet {
+@WebServlet(name = "SvRegistrar", urlPatterns = {"/SvRegistrar"})
+public class SvRegistrar extends HttpServlet {
 
     Usuario usuario = new Usuario();
     ControladorDeUsuarios usuarioCont = new ControladorDeUsuarios();

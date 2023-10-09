@@ -19,8 +19,8 @@ import javax.servlet.ServletContext;
  *
  * @author ADRIAN CASTILLO
  */
-@WebServlet(name = "InicioSeccionSv", urlPatterns = {"/InicioSeccionSv"})
-public class InicioSeccionSv extends HttpServlet {
+@WebServlet(name = "SvInicioSesion", urlPatterns = {"/SvInicioSesion"})
+public class SvInicioSesion extends HttpServlet {
 
     ControladorDeUsuarios controladorDeUsuario = new ControladorDeUsuarios();
     ControladorArchivos archivos = new ControladorArchivos();

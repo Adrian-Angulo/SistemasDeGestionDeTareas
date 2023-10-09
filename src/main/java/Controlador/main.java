@@ -18,13 +18,13 @@ public class main {
     public static void main(String[] args) {
         
         ControladorDeTareas tareasCont = new ControladorDeTareas();
-        Tarea tarea = new Tarea( "cocinar", "lavar los patos de la cosina", "7/10/2023");
+        Tarea tarea = new Tarea( "cocinar", "lavar los patos de la cocina", "7/10/2023");
         
         if(tareasCont.agregarTarea(tarea)){
             System.out.println("Se ha agregado una tarea");
         }
         else{
-            System.out.println("no se pudo agregar una tarea ");
+            System.out.println("no se pudo agregar la tarea ");
         }
 
         

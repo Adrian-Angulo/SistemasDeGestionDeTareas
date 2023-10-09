@@ -37,7 +37,7 @@
             </li>
           </ul>
           <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
@@ -77,15 +77,9 @@
             <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Fecha de vencimiento:</span>
              <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
-            <input type="date" name="nombre" class="form-control" ><br>
+            <input type="date" name="nombre" class="form-control" required><br>
           
           </div>
-
-              
-                    
-
-
-
 
             <div class="col-12">
 
@@ -106,7 +100,6 @@
                 <th><center>Titulo</center></th>
                 <th><center>Descripcion</center></th>
                 <th><center>Fecha de vencimiento</center></th>
-
             </tr>
         </thead>
         <tbody>
