@@ -249,3 +249,18 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
+#eyeIcon {
+    font-size: 18px; /* Ajusta el tamaño del icono según tus preferencias */
+    padding: 3px; /* Añade un pequeño espacio alrededor del icono si es necesario */
+}
+.input-group-append {
+    position: relative;
+    top: -46px; /* Ajusta el valor según sea necesario para alinear verticalmente el botón/icono con el campo de contraseña */
+    right: -250px; /* Ajusta el valor según sea necesario para alinear horizontalmente el botón/icono con el campo de contraseña */
+}
+.input-group-append2 {
+    position: relative;
+    top: -48px; /* Ajusta el valor según sea necesario para alinear verticalmente el botón/icono con el campo de contraseña */
+    right: -250px; /* Ajusta el valor según sea necesario para alinear horizontalmente el botón/icono con el campo de contraseña */
+}

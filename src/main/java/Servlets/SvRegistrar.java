@@ -101,9 +101,11 @@ public class SvRegistrar extends HttpServlet {
 
             // Guardar la lista actualizada de usuarios en el contexto de la aplicación
             context.setAttribute("listaUsuarios", listaUsuarios);
-
+            // Después de agregar el usuario a la lista y antes de redirigir
+            request.getSession().setAttribute("registroExitoso", true);
             // Redirigir al usuario a la página "index.jsp"
             response.sendRedirect("index.jsp");
+
         } catch (NumberFormatException e) {
             // Manejar errores de conversión de número
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cédula inválida.");
