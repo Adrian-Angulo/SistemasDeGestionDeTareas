@@ -3,6 +3,7 @@ Controlador\main.class
 Modelo\Usuario.class
 Controlador\ControladorArchivos.class
 Servlets\SvInicioSesion.class
+Servlets\SvAgregarTareas.class
 Controlador\ControladorDeUsuarios.class
 Modelo\Tarea.class
 Servlets\SvRegistrar.class

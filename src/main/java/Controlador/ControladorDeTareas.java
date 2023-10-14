@@ -29,6 +29,10 @@ public class ControladorDeTareas extends ControladorArchivos{
         nextId = obtenerSiguienteId();
     }
 
+    public void setListaTareas(ArrayList<Tarea> listaTareas) {
+        this.listaTareas = listaTareas;
+    }
+
     /**
      * Obtiene todas las tareas almacenadas en el controlador.
      *
@@ -150,10 +154,6 @@ public class ControladorDeTareas extends ControladorArchivos{
             if (t.getId() == id) {
                 // Eliminar la tarea de la lista
                 listaTareas.remove(t);
-
-                // Guardar la lista actualizada en el archivo
-                
-
                 // Devolver true para indicar que la tarea se eliminó con éxito
                 return true;
             }

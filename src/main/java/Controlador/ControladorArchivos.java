@@ -36,7 +36,7 @@ public class ControladorArchivos {
      *
      * @param tareas La lista de tareas que se va a guardar en el archivo.
      */
-    public static void guardarListaTareas(ArrayList<Tarea> tareas, ServletContext context) {
+    public void guardarListaTareas(ArrayList<Tarea> tareas, ServletContext context) {
         /**
          * Establecemos la ruta
          */
