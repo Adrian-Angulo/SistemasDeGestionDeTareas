@@ -123,9 +123,9 @@ public class ControladorDeUsuarios extends ControladorArchivos {
         }
         return null;
     }
-    public boolean usuarioExistente(int id) {
+    public boolean usuarioExistente(int id, String correo) {
     for (Usuario usuario : listaUsuarios) {
-        if (usuario.getCedula() == id) {
+        if (usuario.getCedula() == id || usuario.getNombreUsuario().equals(correo)) {
             return true; // El usuario ya está registrado.
         }
     }

@@ -7,7 +7,7 @@ package Controlador;
 import Modelo.Tarea;
 
 import java.util.ArrayList;
-
+import java.util.Iterator;
 
 /**
  * ControladorDeTareas es una clase que gestiona las tareas. Esta clase permite
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author ADRIAN CASTILLO
  */
-public class ControladorDeTareas extends ControladorArchivos{
+public class ControladorDeTareas extends ControladorArchivos {
 
     // Lista de tareas gestionadas por el controlador.
     private ArrayList<Tarea> listaTareas = new ArrayList<>();
@@ -25,7 +25,7 @@ public class ControladorDeTareas extends ControladorArchivos{
     private int nextId;
 
     public ControladorDeTareas() {
-        
+
         nextId = obtenerSiguienteId();
     }
 
@@ -100,7 +100,7 @@ public class ControladorDeTareas extends ControladorArchivos{
                 tarea.setId(id); // Asignar el ID a la tarea
 
                 listaTareas.add(tarea);  // Agregar la tarea a la lista de tareas
-                
+
                 return true; // Devolver true para indicar que la tarea se agregó con éxito
 
             }
@@ -129,8 +129,6 @@ public class ControladorDeTareas extends ControladorArchivos{
                 tarea.setFechaDeVencimiento(nuevaTarea.getFechaDeVencimiento());
 
                 // Guardar la lista actualizada en el archivo
-                
-
                 // Devolver true para indicar que la tarea se actualizó con éxito
                 return true;
             }
@@ -148,20 +146,17 @@ public class ControladorDeTareas extends ControladorArchivos{
      * una tarea con el ID especificado.
      */
     public boolean eliminarTarea(int id) {
-        // Recorrer la lista de tareas
-        for (Tarea t : listaTareas) {
-            // Verificar si la tarea actual tiene el mismo ID que el especificado
+        Iterator<Tarea> iterator = listaTareas.iterator();
+        while (iterator.hasNext()) {
+            Tarea t = iterator.next();
             if (t.getId() == id) {
-                // Eliminar la tarea de la lista
-                listaTareas.remove(t);
-                // Devolver true para indicar que la tarea se eliminó con éxito
+                iterator.remove(); // Eliminar la tarea usando el iterador
                 return true;
+            }else{
+                System.out.println("no se encontro el id");
             }
         }
-
-        // Devolver false si no se encontró una tarea con el ID especificado
         return false;
     }
 
- 
 }

@@ -95,7 +95,7 @@ public class SvRegistrar extends HttpServlet {
             }
 
             // Verificar si el usuario existe en la lista por medio de su Cedula
-            if(usuarioCont.usuarioExistente(usuario.getCedula())){
+            if(usuarioCont.usuarioExistente(usuario.getCedula(), nombreUsuarioParam)){
                 System.out.println("El usuario ya existe");
                 request.getSession().setAttribute("registroExitoso", false); //retornar atributo de exitencia
                 response.sendRedirect("index.jsp"); //redireccionar la pagina

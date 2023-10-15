@@ -11,7 +11,35 @@
 <%@include file="Templates/header.jsp"%>
 <!-- nav bar  -->
 
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand"  href="#">Gestion de Tareas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar bg-body-tertiary" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            
+            <li class="nav-item dropdown text-center">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%
+                    String usuario = (String) request.getAttribute("usuario");
+                    out.print(usuario);
+                    %>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Configuracion</a></li>
+                <li><a class="dropdown-item" href="index.jsp">Salir</a></li>
+              </ul>
+            </li>
+            
+          </ul>
 
+        </div>
+      </div>
+    </nav>
 
 
 
@@ -143,7 +171,7 @@
 
                     <!-- Boton para Eliminar Tarea -->
 
-                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>
 
                 </center>
                 </td>
@@ -152,7 +180,7 @@
                 
                 <!<!-- Modal para la confirmacion de eliminar tarea -->
                 
-                <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+                <div class="modal fade" id="eliminar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

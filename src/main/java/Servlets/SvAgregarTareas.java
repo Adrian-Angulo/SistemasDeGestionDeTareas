@@ -54,26 +54,32 @@ public class SvAgregarTareas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServletContext context = getServletContext();
-        String id = request.getParameter("id") ;
+        
+        controlador.setListaTareas(archivos.leerListaTareas(context));
+        String id =  request.getParameter("id");
         String tipo = request.getParameter("tipo");
         System.out.println("el id es" + id);
 
-        switch (tipo) {
-            case "Eliminar":
-                if (controlador.eliminarTarea(Integer.parseInt(id))) {
-                    System.out.println("La tarea con id=" + id + " ha sido eliminada");
-                    archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
-                    response.sendRedirect("Principal.jsp");
-                } else {
-                    System.out.println("no se pudo eliminar");
-                }
+        if (id != null && tipo != null) {
+            switch (tipo) {
+                case "Eliminar":
+                    if (controlador.eliminarTarea(Integer.parseInt(id))) {
+                        System.out.println("La tarea con id=" + id + " ha sido eliminada");
+                        archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
+                        response.sendRedirect("Principal.jsp");
+                    } else {
+                        System.out.println("no se pudo eliminar");
+                        response.sendRedirect("Principal.jsp");
+                    }
 
-                break;
+                    break;
 
+                case "Editar":
+                    break;
 
-            case "Editar":
-                break;
-
+            }
+        }else{
+             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parámetros faltantes o no válidos.");
         }
 
     }

@@ -76,9 +76,9 @@ public class SvInicioSesion extends HttpServlet {
         //validar si el usuario se encuentra encuentra registrado  para iniciar seccion para ello se llama al metodo autenticarUsuario
      
         if (controladorDeUsuario.autenticarUsuario(usuario, contrasena)) {
-            
+            request.setAttribute("usuario",usuario );
             System.out.println("El usuario a iniciado seccion");
-            response.sendRedirect("Principal.jsp");// si el usuariio existe se redirecciona a la pagina Principal
+            request.getRequestDispatcher("Principal.jsp").forward(request, response);// si el usuariio existe se redirecciona a la pagina Principal
         } else {
             
          // Si el inicio de sesión falla, configura el atributo de solicitud "inicioSesionFallido"
