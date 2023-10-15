@@ -15,7 +15,6 @@ public class Tarea {
     String titulo;
     String descripcion;
     String fechaDeVencimiento;
-    
 
     /**
      * Constructor vacío de la clase Tarea.

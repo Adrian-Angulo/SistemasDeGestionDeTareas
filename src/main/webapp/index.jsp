@@ -37,8 +37,6 @@
 <% request.getSession().removeAttribute("registroExitoso"); %>
 <% }%>
 
-
-
 <div class="container" id="container">
     <div class="form-container sign-up-container">
 

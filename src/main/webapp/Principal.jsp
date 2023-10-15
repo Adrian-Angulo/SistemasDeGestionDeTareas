@@ -11,53 +11,45 @@
 
 <%@include file="Templates/header.jsp"%>
 
-    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary my-form2">
+    <div style="font-family: 'Archivo Black';" class="container">
         <a class="navbar-brand"  href="#">Gestion de Tareas</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="navbar bg-body-tertiary" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
-            
-            <li class="nav-item dropdown text-center">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <%
-                    String usuario = (String) request.getAttribute("usuario");
-                    out.print(usuario);
-                    %>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Configuracion</a></li>
-                <li><a class="dropdown-item" href="index.jsp">Salir</a></li>
-              </ul>
-            </li>
-            
-          </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown text-center">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%
+                            String usuario = (String) request.getAttribute("usuario");
+                            out.print(usuario);
+                        %>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Configuracion</a></li>
+                        <li><a class="dropdown-item" href="index.jsp">Salir</a></li>
+                    </ul>
+                </li>
+
+            </ul>
 
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
 
 
-
-<div class="container p-4"> 
-
-<div style="font-family: 'Archivo Black';" class="container p-4"> 
-
+<div style="font-family: 'Archivo Black';" class="container-fluid formulario-agregar" class="container p-4"> 
 
     <div class="row">
         <div class="col-md-4">  <!-- clase division por 4 columnas -->
-            <div class="card card-body"> <!-- tarjeta de trabajo -->
+            <div class="card card-body my-form"> <!-- tarjeta de trabajo -->
 
 
                 <h3 class="text-center">Agregar Tarea</h3>
                 <!-- Formulario que conecta con el servlet y manda por el metodo POST especificamos enctype para 
                 manejar el formulario que manda el FILE. Basado: https://es.stackoverflow.com/questions/48643/como-guardar-imagen-en-proyecto-servlet
                 -->
-                <form action="SvAgregarTareas" method="POST" >
+                <form action="SvAgregarTareas" method="POST" class="my-form">
 
                     <!-- Formulario basado de: https://getbootstrap.com/docs/5.3/forms/input-group/  --> 
 
@@ -67,10 +59,11 @@
                         <input type="text" name="titulo" placeholder="Titulo de tu tarea" class="form-control" required><br>
                     </div>
 
-                    <!-----Descripción-->
+                    <!-- Descripción -->
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Descripcion" name="descripcion" id="floatingTextarea" style="width: 100%; max-width: 314px; height: 120px;" required></textarea>
-                        <label for="floatingTextarea">Descripcion</label>
+                        <textarea class="form-control" placeholder="Descripcion" name="descripcion" id="descripcion" style="width: 100%; max-width: 395px; height: 120px;" required></textarea>
+                        <label for="descripcion">Descripcion</label>
+                        <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div>
                     </div><br>
 
                     <!-----fecha de vencimiento-->
@@ -88,10 +81,7 @@
         </div> 
 
 
-
-
         <!-- Creamos la tabla interactiva -->
-
         <div style="font-family: 'Archivo Black';" class="col-md-8">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
@@ -122,16 +112,20 @@
                             </li>
 
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search" required>
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
-                        </form>
+
+           <form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por nombre" aria-label="Search">
+    <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
+</form>
+
+
+
                     </div>
                 </div>
             </nav>
 
             <!-- Tabla donde se organizan las tareas -->
-            <table style="font-family: 'Archivo Black';" class="table table-hover">
+            <table style="font-family: 'Archivo Black';" class="table table-hover table-listado">
 
                 <!-- Titulos de la tabla -->
                 <thead>
@@ -174,16 +168,35 @@
 
                     <!-- Boton para Eliminar Tarea -->
 
-                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>                   
 
                 </center>
                 </td>
                 </tr>
-                
-                
-                <!<!-- Modal para la confirmacion de eliminar tarea -->
-                
-                <div class="modal fade" id="eliminar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskModalLabel">Detalles de la Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">                 
+                <h4 style='color: #1c1c1c;'><strong>ID</strong></h4> <h4 style='color: #555555;' id="modalTaskId"></h4>
+                <h4 style='color: #1c1c1c;'><strong>Título</strong></h4> <h4 style='color: #555555;' id="modalTaskTitle"></h4>
+                <h4 style='color: #1c1c1c;'><strong>Descripción</strong></h4> <h4 style='color: #555555;' id="modalTaskDescription"></h4>
+                <h4 style='color: #1c1c1c;'><strong>Fecha de Vencimiento</strong></h4> <h4 style='color: #555555;' id="modalTaskDueDate"></h4>   
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+                <!-- Modal para la confirmacion de eliminar tarea -->
+
+                <div class="modal fade" id="eliminar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true" data-bs-backdrop="static">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -220,12 +233,96 @@
         </div>
     </div>  
 </div> 
+<!-- este script no permite que la tecla enter funcione dentro del textarea para evitar error en agregar tarea-->
 <script>
-    document.getElementById('floatingTextarea').addEventListener('keydown', function (e) {
+    document.getElementById('descripcion').addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-            e.preventDefault(); // Evitar el salto de línea
+            // Evitar el salto de línea
+            e.preventDefault();
         }
     });
 </script>
+<script>
+
+    // Obtén una referencia al campo de descripción y al elemento para mostrar el contador.
+    var descripcionField = document.getElementById("descripcion");
+    var wordCount = document.getElementById("wordCount");
+
+    // Establece el límite de palabras.
+    var maxWords = 20;
+
+    descripcionField.addEventListener("input", function (e) {
+        // Divide el contenido del campo de descripción en palabras y cuenta la longitud del array resultante.
+        var words = descripcionField.value.trim().split(/\s+/);
+        var wordCountValue = words.length;
+
+        // Actualiza el contador de palabras.
+        wordCount.textContent = wordCountValue + " palabras de " + maxWords + " (máximo)";
+
+        // Si se excede el límite, recorta el contenido y cambia el color del mensaje.
+        if (wordCountValue > maxWords) {
+            // Recorta el contenido para que tenga el número máximo de palabras.
+            descripcionField.value = words.slice(0, maxWords).join(" ");
+            wordCount.textContent = maxWords + " palabras de " + maxWords + " (máximo)";
+            wordCount.style.color = "#888"; // Cambia el color al gris claro que desees.
+            wordCount.classList.add("wordCountMessage"); // Agrega la clase para cambiar el color.
+        } else {
+            wordCount.style.color = "#888"; // Restaura el color original si no se excede el límite.
+            wordCount.classList.remove("wordCountMessage"); // Elimina la clase si no se excede el límite.
+        }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Función para realizar la búsqueda y mostrar la información en la ventana modal
+        $("#searchButton").click(function () {
+            var searchTerm = $("#searchInput").val().trim();                    
+            if (searchTerm !== "") {
+                // Realizar la búsqueda de la tarea por nombre
+                var taskFound = false;
+                $(".custom-name-cell").each(function () {
+                    if ($(this).text().toLowerCase().includes(searchTerm.toLowerCase())) {
+                        taskFound = true;
+                        var taskId = $(this).closest("tr").find("td:first-child").text();
+                        var taskTitle = $(this).text();
+                        var taskDescription = $(this).closest("tr").find(".custom-description-cell").text();
+                        var taskDueDate = $(this).closest("tr").find("td:nth-child(4)").text();
+
+                        // Actualizar el contenido de la modal
+                        $("#modalTaskId").text(taskId);
+                        $("#modalTaskTitle").text(taskTitle);
+                        $("#modalTaskDescription").text(taskDescription);
+                        $("#modalTaskDueDate").text(taskDueDate);
+
+                        // Mostrar la modal
+                        $("#taskModal").modal("show");
+                        return false;
+                    }
+                });
+
+                if (!taskFound) {
+                    // Manejar el caso en el que no se encontraron tareas
+                    alert("No se encontraron tareas con el nombre proporcionado.");
+                }
+            } else {
+                // Manejar el caso en el que el campo de búsqueda está vacío
+                alert("Ingrese un nombre para buscar tareas.");
+                
+            }
+        });
+    });
+</script>
+<script>
+    
+</script>
+    <!-- este script hace que el texto de la descripción se ajuste al siguiente renglón mostrando en la modal de buscar-->
+
+<style>
+    #modalTaskDescription {
+        word-wrap: break-word;
+    }
+</style>
+
 
 <%@include file="Templates/footer.jsp"%>

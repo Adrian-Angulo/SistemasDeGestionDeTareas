@@ -12,7 +12,35 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+/* cambios para hacer un espaciado entre nav bar inicial con tabla de listado y formulario agg tarea*/
+.formulario-agregar {
+    margin-top: 20px;
+   
+}
+/* cambios para margen y borde a la tabla del listado de tareas */
+.table-listado {
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    /* Agrega una sombra alrededor de la tabla */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    padding: 10px; /* Ajusta el espacio interno de la tabla */
+}
+/*color para el mensaje inferior del textarea de la descripcion*/
+.wordCountMessage {
+    color: #888; 
+}
 
-
-
-
+/* Estilo para el formulario */
+.my-form {
+    padding: 20px;
+    background-color: #F9F9F9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.my-form2 {
+    padding: 20px;
+    border: 1px;
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
