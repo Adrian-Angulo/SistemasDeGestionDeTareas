@@ -81,9 +81,8 @@ public class SvAgregarTareas extends HttpServlet {
         }else{
              response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parámetros faltantes o no válidos.");
         }
-
     }
-
+ 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -108,8 +107,7 @@ public class SvAgregarTareas extends HttpServlet {
             response.sendRedirect("Principal.jsp");
         } else {
             System.out.println("no se pudo guardar la tarea");
-        }
-
+        }       
     }
 
     /**

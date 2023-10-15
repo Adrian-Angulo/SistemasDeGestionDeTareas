@@ -32,5 +32,3 @@
        Ups! parece que la cuenta no existe, verifica bien.
     </div>
 <% } %>
-
-    </body>

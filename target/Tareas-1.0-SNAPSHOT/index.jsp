@@ -6,6 +6,7 @@
 
 <%@include file="Templates/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="estilos/style.css">
+
 <!-- alerta o notificacion para indicar que el usuario ha sido guardado exitosamente-->
 <% if (request.getSession().getAttribute("registroExitoso") != null && (boolean) request.getSession().getAttribute("registroExitoso") == true) { %>
 <div class="alert alert-success alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
@@ -37,11 +38,10 @@
 <% }%>
 
 
+
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        
-        
-        
+
                                     <!-- Formulario para Registrarse si eres nuevo -->
         
         
@@ -76,7 +76,7 @@
     <div class="form-container sign-in-container">
 
 
-                                        <!-- Formulario de inicio de seccion -->
+                                        <!-- Formulario de inicio de sesion -->
         
         
         <form action="SvInicioSesion" method="POST">
@@ -224,8 +224,6 @@
             }
         };
     </script>
-
-
 
 
     <%@include file="Templates/footer.jsp"%>
