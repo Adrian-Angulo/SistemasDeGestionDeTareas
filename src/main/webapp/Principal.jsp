@@ -7,22 +7,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Controlador.ControladorArchivos"%>
 <%@page import="Controlador.ControladorDeTareas"%>
+<link rel="stylesheet" type="text/css" href="estilos/stylePrincipal.css">
 
 <%@include file="Templates/header.jsp"%>
-<!-- nav bar  -->
 
-
-
-
-
-<div class="container p-4"> 
+<div style="font-family: 'Archivo Black';" class="container-fluid p-4"> 
 
     <div class="row">
         <div class="col-md-4">  <!-- clase division por 4 columnas -->
             <div class="card card-body"> <!-- tarjeta de trabajo -->
 
 
-                <h3>Agregar Tarea</h3>
+                <h3 class="text-center">Agregar Tarea</h3>
                 <!-- Formulario que conecta con el servlet y manda por el metodo POST especificamos enctype para 
                 manejar el formulario que manda el FILE. Basado: https://es.stackoverflow.com/questions/48643/como-guardar-imagen-en-proyecto-servlet
                 -->
@@ -31,27 +27,27 @@
                     <!-- Formulario basado de: https://getbootstrap.com/docs/5.3/forms/input-group/  --> 
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Titulo:</span>
+                        <span class="input-group-text" id="basic-addon1">Titulo</span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
-                        <input type="text" name="titulo" class="form-control" ><br>
+                        <input type="text" name="titulo" placeholder="Titulo de tu tarea" class="form-control" required><br>
                     </div>
 
-
-                    <!-----Descripcion-->
+                    <!-----Descripción-->
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Descripcion" name="descripcion" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Descripcion</label>
+                        <textarea class="form-control" placeholder="Descripción" name="descripcion" id="floatingTextarea" style="width: 100%; max-width: 314px; height: 120px;" required></textarea>
+                        <label for="floatingTextarea">Descripción</label>
                     </div><br>
 
                     <!-----fecha de vencimiento-->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Fecha de vencimiento:</span>
+                        <span class="input-group-text" id="basic-addon1">Fecha de vencimiento</span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="date" name="fecha" class="form-control" required><br>
                     </div>
 
-
-                    <input  class="btn btn-success" type="submit" value="Agregar">
+                    <div class="text-center">                            
+                        <input  class="btn btn-success mx-auto" type="submit" value="Agregar Tarea">
+                    </div>
                 </form>
             </div> 
         </div> 
@@ -61,15 +57,16 @@
 
         <!-- Creamos la tabla interactiva -->
 
-        <div class="col-md-8">
+        <div style="font-family: 'Archivo Black';" class="col-md-8">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Gestion de tareas</a>
+                    <a class="navbar-brand" href="#">Listado de tareas</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
+                    <!-- nav bar  -->
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -94,19 +91,21 @@
                             <input class="form-control me-2" type="search" placeholder="Buscar por nombre" aria-label="Search" required>
                             <button class="btn btn-outline-success" type="submit">Buscar</button>
                         </form>
+                        <!-- boton para cerrar sesion -->
+                        <a class="btn btn-danger" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#confirmLogoutModal">Cerrar Sesión</a>
                     </div>
                 </div>
             </nav>
 
             <!-- Tabla donde se organizan las tareas -->
-            <table class="table table-hover">
+            <table style="font-family: 'Archivo Black';" class="table  table-bordered table-light">
 
                 <!-- Titulos de la tabla -->
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th><center>id</center></th>
                 <th><center>Titulo</center></th>
-                <th><center>Descripcion</center></th>
+                <th><center>Descripción</center></th>
                 <th><center>Fecha de vencimiento</center></th>
                 <th><center>Acciones</center></th>
                 </tr>
@@ -129,11 +128,10 @@
                             for (Tarea t : listaTarea) {
 
                     %>
-                    <tr>
-
-                <td><center><%out.println(t.getId());%></center></td>
-                <td><center><%out.println(t.getTitulo());%></center></td>
-                <td><center><%out.println(t.getDescripcion());%></center></td>
+                    <tr class="text-center">
+                        <td><center><%out.println(t.getId());%></center></td>
+                <td><center><div class="custom-name-cell"><%out.println(t.getTitulo());%></div></center></td>
+                <td><center><div class="custom-description-cell"><%out.println(t.getDescripcion());%></div></center></td>
                 <td><center><%out.println(t.getFechaDeVencimiento());%></center></td>
                 <td><center>
 
@@ -148,10 +146,31 @@
                 </center>
                 </td>
                 </tr>
-                
-                
-                <!<!-- Modal para la confirmacion de eliminar tarea -->
-                
+
+                <!-- Modal de confirmación de cierre de sesión -->
+                <div class="modal fade" id="confirmLogoutModal" tabindex="-1" role="dialog" aria-labelledby="confirmLogoutModalLabel" aria-hidden="true"  data-bs-backdrop="static">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmLogoutModalLabel">Confirmar Cierre de Sesión</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+
+                            </div>
+                            <div class="modal-body">
+                                ¿Estás seguro de que deseas cerrar sesión?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <!-- Agrega aquí un enlace para cerrar la sesión -->
+                                <a class="btn btn-danger" href="SvInicioSesion" id="cerrarSesionBtn">Cerrar Sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal para la confirmacion de eliminar tarea -->
+
                 <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -161,12 +180,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ¿Estás seguro de que deseas eliminar la tarea  con titulo <%=t.getTitulo() %>?
+                                ¿Estás seguro de que deseas eliminar la tarea "<%=t.getTitulo()%>"?
                             </div>
                             <div class="modal-footer">
-                                <button type="button"  class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button> 
+                                <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> 
                                 <!-- Agrega aquí un botón para realizar la eliminación -->
-                                <a href="SvAgregarTareas?tipo=Eliminar&id=<%= t.getId()%>" class="btn btn-outline-danger"  id="confirmarEliminacion">Eliminar</a>
+                                <a href="SvAgregarTareas?tipo=Eliminar&id=<%= t.getId()%>" class="btn btn-danger"  id="confirmarEliminacion">Eliminar</a>
                             </div>
                         </div>
                     </div>
@@ -189,5 +208,12 @@
         </div>
     </div>  
 </div> 
+<script>
+    document.getElementById('floatingTextarea').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Evitar el salto de línea
+        }
+    });
+</script>
 
 <%@include file="Templates/footer.jsp"%>

@@ -98,6 +98,7 @@ input {
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
+        
 }
 
 .form-container {
@@ -251,16 +252,16 @@ footer a {
 }
 
 #eyeIcon {
-    font-size: 18px; /* Ajusta el tamaño del icono según tus preferencias */
-    padding: 3px; /* Añade un pequeño espacio alrededor del icono si es necesario */
+    font-size: 18px; 
+    padding: 3px; 
 }
 .input-group-append {
     position: relative;
-    top: -46px; /* Ajusta el valor según sea necesario para alinear verticalmente el botón/icono con el campo de contraseña */
-    right: -250px; /* Ajusta el valor según sea necesario para alinear horizontalmente el botón/icono con el campo de contraseña */
+    top: -46px;
+    right: -250px; 
 }
 .input-group-append2 {
     position: relative;
-    top: -48px; /* Ajusta el valor según sea necesario para alinear verticalmente el botón/icono con el campo de contraseña */
-    right: -250px; /* Ajusta el valor según sea necesario para alinear horizontalmente el botón/icono con el campo de contraseña */
+    top: -48px; 
+    right: -250px; 
 }

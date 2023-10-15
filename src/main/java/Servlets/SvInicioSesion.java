@@ -41,7 +41,8 @@ public class SvInicioSesion extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * En este metodo doGet se realiza el cierre de sesion con el atributo invalidate para despues hacer
+     * la redireccion a la pagina del login o index.jsp
      *
      * @param request servlet request
      * @param response servlet response
@@ -51,7 +52,12 @@ public class SvInicioSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //metodos agregados para hacer el cierre de sesion
+        // Invalida la sesión actual
+        request.getSession().invalidate();
 
+        // Redirige al usuario a la página de inicio de sesión o a otra página de tu elección
+        response.sendRedirect("index.jsp"); // Puedes cambiar la URL según tus necesidades
     }
 
     /**
@@ -67,26 +73,26 @@ public class SvInicioSesion extends HttpServlet {
             throws ServletException, IOException {
         ServletContext context = getServletContext();
         controladorDeUsuario.setListaUsuarios(archivos.leerListaUsuarios(context));
-        
+
         String usuario = request.getParameter("correo"); // recibir el usuario 
         String contrasena = request.getParameter("contrasena"); // recibir la contraseña 
 
         System.out.println(usuario);
         System.out.println(contrasena);
         //validar si el usuario se encuentra encuentra registrado  para iniciar seccion para ello se llama al metodo autenticarUsuario
-     
+
         if (controladorDeUsuario.autenticarUsuario(usuario, contrasena)) {
-            
+
             System.out.println("El usuario a iniciado seccion");
             response.sendRedirect("Principal.jsp");// si el usuariio existe se redirecciona a la pagina Principal
         } else {
-            
-         // Si el inicio de sesión falla, configura el atributo de solicitud "inicioSesionFallido"
-        request.setAttribute("inicioSesionFallido", true);
-        // Redirigir de nuevo a la página de inicio (index.jsp) con el mensaje de error
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            // Si el inicio de sesión falla, configura el atributo de solicitud "inicioSesionFallido"
+            request.setAttribute("inicioSesionFallido", true);
+            // Redirigir de nuevo a la página de inicio (index.jsp) con el mensaje de error
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        
+
     }
 
     /**
