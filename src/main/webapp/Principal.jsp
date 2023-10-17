@@ -42,6 +42,45 @@
 
     <div class="row">
         <div class="col-md-4">  <!-- clase division por 4 columnas -->
+            
+            
+            
+            <!-- alerta para indicar que no se puede registrar una tarea con un id existente-->
+            
+            
+            <% if (request.getSession().getAttribute("alertaID") != null && (boolean) request.getSession().getAttribute("alertaID") == true) { %>
+            <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
+                El ID que ha ingresado ya existe en nuestro sistema.
+            </div>
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#registroExitosoAlert').alert('close');
+                }, 3000);
+            </script>
+            <% request.getSession().removeAttribute("alertaID"); %>
+            <% } %>
+            
+            
+            <!-- alerta para indicar que no se puede registrar una tarea con un id existente-->
+            
+            
+            <% if (request.getSession().getAttribute("alertaIDnegativo") != null && (boolean) request.getSession().getAttribute("alertaIDnegativo") == true) { %>
+            <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
+                El ID que ha ingresado no puede ser negativo o cero
+            </div>
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#alertaIDnegativo').alert('close');
+                }, 3000);
+            </script>
+            <% request.getSession().removeAttribute("alertaIDnegativo"); %>
+            <% } %>
+            
+            
+            
+            
             <div class="card card-body my-form"> <!-- tarjeta de trabajo -->
 
 
@@ -51,8 +90,15 @@
                 -->
                 <form action="SvAgregarTareas" method="POST" class="my-form">
 
-                    <!-- Formulario basado de: https://getbootstrap.com/docs/5.3/forms/input-group/  --> 
 
+                    <!-- Id -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Id</span>
+                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                        <input type="text" name="id" placeholder="Id de la tarea" class="form-control" required><br>
+                    </div>
+
+                    <!-- Titulo -->
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Titulo</span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
@@ -113,10 +159,10 @@
 
                         </ul>
 
-           <form class="d-flex" role="search">
-    <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por nombre" aria-label="Search">
-    <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
-</form>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por nombre" aria-label="Search">
+                            <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
+                        </form>
 
 
 
@@ -174,26 +220,26 @@
                 </td>
                 </tr>
 
-<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taskModalLabel">Detalles de la Tarea</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">                 
-                <h4 style='color: #1c1c1c;'><strong>ID</strong></h4> <h4 style='color: #555555;' id="modalTaskId"></h4>
-                <h4 style='color: #1c1c1c;'><strong>Título</strong></h4> <h4 style='color: #555555;' id="modalTaskTitle"></h4>
-                <h4 style='color: #1c1c1c;'><strong>Descripción</strong></h4> <h4 style='color: #555555;' id="modalTaskDescription"></h4>
-                <h4 style='color: #1c1c1c;'><strong>Fecha de Vencimiento</strong></h4> <h4 style='color: #555555;' id="modalTaskDueDate"></h4>   
-            </div>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+                <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="taskModalLabel">Detalles de la Tarea</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">                 
+                                <h4 style='color: #1c1c1c;'><strong>ID</strong></h4> <h4 style='color: #555555;' id="modalTaskId"></h4>
+                                <h4 style='color: #1c1c1c;'><strong>Título</strong></h4> <h4 style='color: #555555;' id="modalTaskTitle"></h4>
+                                <h4 style='color: #1c1c1c;'><strong>Descripción</strong></h4> <h4 style='color: #555555;' id="modalTaskDescription"></h4>
+                                <h4 style='color: #1c1c1c;'><strong>Fecha de Vencimiento</strong></h4> <h4 style='color: #555555;' id="modalTaskDueDate"></h4>   
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Modal para la confirmacion de eliminar tarea -->
 
                 <div class="modal fade" id="eliminar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -277,7 +323,7 @@
     $(document).ready(function () {
         // Función para realizar la búsqueda y mostrar la información en la ventana modal
         $("#searchButton").click(function () {
-            var searchTerm = $("#searchInput").val().trim();                    
+            var searchTerm = $("#searchInput").val().trim();
             if (searchTerm !== "") {
                 // Realizar la búsqueda de la tarea por nombre
                 var taskFound = false;
@@ -308,15 +354,15 @@
             } else {
                 // Manejar el caso en el que el campo de búsqueda está vacío
                 alert("Ingrese un nombre para buscar tareas.");
-                
+
             }
         });
     });
 </script>
 <script>
-    
+
 </script>
-    <!-- este script hace que el texto de la descripción se ajuste al siguiente renglón mostrando en la modal de buscar-->
+<!-- este script hace que el texto de la descripción se ajuste al siguiente renglón mostrando en la modal de buscar-->
 
 <style>
     #modalTaskDescription {

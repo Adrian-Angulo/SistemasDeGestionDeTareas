@@ -81,8 +81,8 @@ public class ControladorArchivos {
                     String titulo = partes[1];
                     String descripcion = partes[2];
                     String fechaDeVencimiento = partes[3];
-                    Tarea tarea = new Tarea(titulo, descripcion, fechaDeVencimiento);
-                    tarea.setId(id);
+                    Tarea tarea = new Tarea(id, titulo, descripcion, fechaDeVencimiento);
+//                    tarea.setId(id);
                     tareas.add(tarea);
 
                 }

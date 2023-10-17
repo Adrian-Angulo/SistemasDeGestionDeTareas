@@ -18,7 +18,7 @@ public class main {
     public static void main(String[] args) {
         
         ControladorDeTareas tareasCont = new ControladorDeTareas();
-        Tarea tarea = new Tarea( "cocinar", "lavar los patos de la cocina", "7/10/2023");
+        Tarea tarea = new Tarea( 0,"cocinar", "lavar los patos de la cocina", "7/10/2023");
         
         if(tareasCont.agregarTarea(tarea)){
             System.out.println("Se ha agregado una tarea");

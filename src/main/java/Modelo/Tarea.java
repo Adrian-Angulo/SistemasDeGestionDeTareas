@@ -11,7 +11,7 @@ package Modelo;
  * @author ADRIAN CASTILLO
  */
 public class Tarea {
-    int id=0;
+    int id;
     String titulo;
     String descripcion;
     String fechaDeVencimiento;
@@ -28,8 +28,9 @@ public class Tarea {
      * @param descripcion La descripción de la tarea.
      * @param fechaDeVencimiento La fecha de vencimiento de la tarea.
      */
-    public Tarea( String titulo, String descripcion, String fechaDeVencimiento) {
-        
+
+    public Tarea(int id, String titulo, String descripcion, String fechaDeVencimiento) {
+        this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaDeVencimiento = fechaDeVencimiento;

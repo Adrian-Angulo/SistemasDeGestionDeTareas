@@ -22,13 +22,6 @@ public class ControladorDeTareas extends ControladorArchivos {
     private ArrayList<Tarea> listaTareas = new ArrayList<>();
 
     // Identificador único para la próxima tarea.
-    private int nextId;
-
-    public ControladorDeTareas() {
-
-        nextId = obtenerSiguienteId();
-    }
-
     public void setListaTareas(ArrayList<Tarea> listaTareas) {
         this.listaTareas = listaTareas;
     }
@@ -40,27 +33,6 @@ public class ControladorDeTareas extends ControladorArchivos {
      */
     public ArrayList<Tarea> obtenerTodasLasTareas() {
         return listaTareas;
-    }
-
-    /**
-     * Obtiene el siguiente identificador único disponible para asignar a una
-     * nueva tarea.
-     *
-     * @return El siguiente identificador único disponible.
-     */
-    private int obtenerSiguienteId() {
-        // Inicializar la variable que almacenará el máximo identificador a 0.
-        int maxId = 0;
-        // Iterar a través de todas las tareas en la lista.
-        for (Tarea tarea : listaTareas) {
-            // Comprobar si el identificador de la tarea actual es mayor que el máximo actual.
-            if (tarea.getId() > maxId) {
-                // Si es así, actualizar el valor de maxId con el nuevo máximo identificador.
-                maxId = tarea.getId();
-            }
-        }
-        // Incrementar el máximo identificador encontrado en 1 para obtener el siguiente ID disponible.
-        return maxId + 1;
     }
 
     /**
@@ -92,32 +64,32 @@ public class ControladorDeTareas extends ControladorArchivos {
     public boolean agregarTarea(Tarea tarea) {
         // Verificar si la tarea no es nula
         if (tarea != null) {
-            // Obtener el siguiente ID disponible
-            int id = obtenerSiguienteId();
-
-            // Obtener el siguiente ID disponible
-            if (id > 0) {
-                tarea.setId(id); // Asignar el ID a la tarea
-
-                listaTareas.add(tarea);  // Agregar la tarea a la lista de tareas
-
-                return true; // Devolver true para indicar que la tarea se agregó con éxito
-
+            // Verificar si la tarea ya existe en la lista por su ID
+            for (Tarea t : listaTareas) {
+                if (t.getId() == tarea.getId()) {
+                    // La tarea ya existe en la lista, no se puede agregar otra con el mismo ID
+                    return false;
+                }
             }
+
+            // Si llegamos aquí, significa que la tarea no existe en la lista
+            // Agregar la tarea a la lista de tareas
+            listaTareas.add(tarea);
+            return true; // Devolver true para indicar que la tarea se agregó con éxito
         }
-        return false; // Devolver false si la tarea es nula o no se pudo agregar
-
+        return false; // Devolver false si la tarea es nula
     }
+     /**
+             * Actualiza una tarea existente en el controlador.
+             *
+             * @param id El identificador único de la tarea que se va a
+             * actualizar.
+             * @param nuevaTarea La nueva información de la tarea que
+             * reemplazará a la existente.
+             * @return true si la tarea se actualizó con éxito, false si no se
+             * pudo encontrar la tarea con el ID especificado.
+             */
 
-    /**
-     * Actualiza una tarea existente en el controlador.
-     *
-     * @param id El identificador único de la tarea que se va a actualizar.
-     * @param nuevaTarea La nueva información de la tarea que reemplazará a la
-     * existente.
-     * @return true si la tarea se actualizó con éxito, false si no se pudo
-     * encontrar la tarea con el ID especificado.
-     */
     public boolean actualizarTarea(int id, Tarea nuevaTarea) {
         // Recorrer la lista de tareas
         for (Tarea tarea : listaTareas) {
@@ -152,7 +124,7 @@ public class ControladorDeTareas extends ControladorArchivos {
             if (t.getId() == id) {
                 iterator.remove(); // Eliminar la tarea usando el iterador
                 return true;
-            }else{
+            } else {
                 System.out.println("no se encontro el id");
             }
         }

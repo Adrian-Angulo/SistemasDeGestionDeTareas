@@ -54,9 +54,9 @@ public class SvAgregarTareas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServletContext context = getServletContext();
-        
+
         controlador.setListaTareas(archivos.leerListaTareas(context));
-        String id =  request.getParameter("id");
+        String id = request.getParameter("id");
         String tipo = request.getParameter("tipo");
         System.out.println("el id es" + id);
 
@@ -76,13 +76,13 @@ public class SvAgregarTareas extends HttpServlet {
 
                 case "Editar":
                     break;
-                    
+
             }
-        }else{
-             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parámetros faltantes o no válidos.");
+        } else {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Parámetros faltantes o no válidos.");
         }
     }
- 
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -96,18 +96,29 @@ public class SvAgregarTareas extends HttpServlet {
             throws ServletException, IOException {
         ServletContext context = getServletContext();
         controlador.setListaTareas(archivos.leerListaTareas(context));
+        int id = Integer.parseInt(request.getParameter("id"));
         String titulo = request.getParameter("titulo");
         String descripcion = request.getParameter("descripcion");
         String fecha = request.getParameter("fecha");
-        Tarea tarea = new Tarea(titulo, descripcion, fecha);
+        Tarea tarea = new Tarea(id, titulo, descripcion, fecha);
 
-        if (controlador.agregarTarea(tarea)) {
-            archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
-            System.out.println("la tarea se ha guardado exitosamente");
-            response.sendRedirect("Principal.jsp");
+        if (tarea.getId()>0) {
+
+            if (controlador.agregarTarea(tarea)) {
+                archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
+                System.out.println("la tarea se ha guardado exitosamente");
+                response.sendRedirect("Principal.jsp");
+            } else {
+                System.out.println("no se pudo guardar la tarea");
+                request.getSession().setAttribute("alertaID", true); //enviar un parametro para mostrar la alerta 
+                response.sendRedirect("Principal.jsp");
+            }
+
         } else {
-            System.out.println("no se pudo guardar la tarea");
-        }       
+            request.getSession().setAttribute("alertaIDnegativo", true); //enviar un parametro para mostrar la alerta 
+            response.sendRedirect("Principal.jsp");
+        }
+
     }
 
     /**
