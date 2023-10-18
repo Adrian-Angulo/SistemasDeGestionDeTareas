@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.ServletContext;
 
 /**
@@ -36,7 +38,7 @@ public class ControladorArchivos {
      *
      * @param tareas La lista de tareas que se va a guardar en el archivo.
      */
-    public void guardarListaTareas(ArrayList<Tarea> tareas, ServletContext context) {
+    public void guardarListaTareas(List<Tarea> tareas, ServletContext context) {
         /**
          * Establecemos la ruta
          */
@@ -65,11 +67,11 @@ public class ControladorArchivos {
      * @param context
      * @return Una lista de tareas leída desde el archivo de tareas.
      */
-    public ArrayList<Tarea> leerListaTareas(ServletContext context) {
+    public List<Tarea> leerListaTareas(ServletContext context) {
         String ruta = "/Archivos/tareas.txt";// Nombramos la carpeta ya creada y el tipo de archivo que queremos crear -Datos conocidos
 
         String rutaa = context.getRealPath(ruta);
-        ArrayList<Tarea> tareas = new ArrayList<>();
+        List<Tarea> tareas = new LinkedList<Tarea>();
 
         try (FileReader fileReader = new FileReader(rutaa); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 

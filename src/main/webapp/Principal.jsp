@@ -4,6 +4,7 @@
     Author     : ADRIAN CASTILLO
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Controlador.ControladorArchivos"%>
 <%@page import="Controlador.ControladorDeTareas"%>
@@ -21,7 +22,7 @@
                 <li class="nav-item dropdown text-center">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <%
-                            String usuario = (String) request.getAttribute("usuario");
+                            String usuario = (String) session.getAttribute("usuario");
                             out.print(usuario);
                         %>
                     </a>
@@ -42,12 +43,28 @@
 
     <div class="row">
         <div class="col-md-4">  <!-- clase division por 4 columnas -->
-            
-            
-            
+
+
+            <!-- alerta para indicar que no se encontro la tarea para agregar otra tarea despues de ella-->
+
+
+            <% if (request.getSession().getAttribute("alertaDespues") != null && (boolean) request.getSession().getAttribute("alertaDespues") == true) { %>
+            <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
+                 No se pudo agregar la nueva tarea. No se encontró la tarea anterior a la que se pretendía agregar la nueva.
+            </div>
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#registroExitosoAlert').alert('close');
+                }, 4000);
+            </script>
+            <% request.getSession().removeAttribute("alertaDespues"); %>
+            <% } %>
+
+
             <!-- alerta para indicar que no se puede registrar una tarea con un id existente-->
-            
-            
+
+
             <% if (request.getSession().getAttribute("alertaID") != null && (boolean) request.getSession().getAttribute("alertaID") == true) { %>
             <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
                 El ID que ha ingresado ya existe en nuestro sistema.
@@ -60,11 +77,11 @@
             </script>
             <% request.getSession().removeAttribute("alertaID"); %>
             <% } %>
-            
-            
+
+
             <!-- alerta para indicar que no se puede registrar una tarea con un id existente-->
-            
-            
+
+
             <% if (request.getSession().getAttribute("alertaIDnegativo") != null && (boolean) request.getSession().getAttribute("alertaIDnegativo") == true) { %>
             <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
                 El ID que ha ingresado no puede ser negativo o cero
@@ -77,10 +94,10 @@
             </script>
             <% request.getSession().removeAttribute("alertaIDnegativo"); %>
             <% } %>
-            
-            
-            
-            
+
+
+
+
             <div class="card card-body my-form"> <!-- tarjeta de trabajo -->
 
 
@@ -118,6 +135,37 @@
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="date" name="fecha" class="form-control" required><br>
                     </div>
+
+
+                    <!-----Agregar despues De una tarea-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Agregar despues de</span>
+                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                        <input type="text" name="despues" class="form-control" placeholder="Titulo de tarea"><br>
+                    </div>
+                    
+                    
+                    <!-----Agregar antes De una tarea-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Agregar Antes de</span>
+                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                        <input type="text" name="antes" class="form-control" placeholder="Titulo de tarea"><br>
+                    </div>
+
+
+                    <!-- inicio Bontones de agregar primero y ultimo -->
+
+                    <div class="text-center" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="agregar" value="Primero" id="btnradio1" autocomplete="off">
+                        <label class="btn btn-outline" for="btnradio1">Agregar Primero</label>
+
+                        <input type="radio" class="btn-check" name="agregar" value="Ultimo" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline" for="btnradio2">Agregar Ultimo</label>
+                    </div>
+
+                    <!-- fin Bontones de agregar primero y ultimo -->
+                    <br>
+                    <!-- boton para agregar la tarea -->
 
                     <div class="text-center">                            
                         <input  class="btn btn-success mx-auto" type="submit" value="Agregar Tarea">
@@ -194,7 +242,7 @@
                         ControladorDeTareas tareas = new ControladorDeTareas();
 
                         tareas.setListaTareas(archivos.leerListaTareas(context));
-                        ArrayList<Tarea> listaTarea = tareas.obtenerTodasLasTareas();
+                        List<Tarea> listaTarea = tareas.obtenerTodasLasTareas();
 
                         if (listaTarea != null && !listaTarea.isEmpty()) {
 

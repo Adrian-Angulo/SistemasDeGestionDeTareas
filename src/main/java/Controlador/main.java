@@ -20,14 +20,14 @@ public class main {
         ControladorDeTareas tareasCont = new ControladorDeTareas();
         Tarea tarea = new Tarea( 0,"cocinar", "lavar los patos de la cocina", "7/10/2023");
         
-        if(tareasCont.agregarTarea(tarea)){
-            System.out.println("Se ha agregado una tarea");
-        }
-        else{
-            System.out.println("no se pudo agregar la tarea ");
-        }
-
-        
+//        if(tareasCont.agregarTarea(tarea)){
+//            System.out.println("Se ha agregado una tarea");
+//        }
+//        else{
+//            System.out.println("no se pudo agregar la tarea ");
+//        }
+//
+//        
         
         
     }

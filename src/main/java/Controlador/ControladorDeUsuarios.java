@@ -123,6 +123,18 @@ public class ControladorDeUsuarios extends ControladorArchivos {
         }
         return null;
     }
+    
+        public Usuario obtenerUsuarioPorCorreo(String correo) {
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario.getNombreUsuario().equals(correo)) {
+                return usuario;
+            }
+
+        }
+        return null;
+    }
+    
+    
     public boolean usuarioExistente(int id, String correo) {
     for (Usuario usuario : listaUsuarios) {
         if (usuario.getCedula() == id || usuario.getNombreUsuario().equals(correo)) {

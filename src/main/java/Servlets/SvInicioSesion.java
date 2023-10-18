@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Controlador.ControladorDeUsuarios;
 import Controlador.ControladorArchivos;
+import Modelo.Usuario;
 import javax.servlet.ServletContext;
 
 /**
@@ -74,16 +75,16 @@ public class SvInicioSesion extends HttpServlet {
         ServletContext context = getServletContext();
         controladorDeUsuario.setListaUsuarios(archivos.leerListaUsuarios(context));
 
-        String usuario = request.getParameter("correo"); // recibir el usuario 
-        String contrasena = request.getParameter("contrasena"); // recibir la contraseña 
+        final String usuario = request.getParameter("correo").trim(); // recibir el usuario 
+        final String contrasena = request.getParameter("contrasena").trim(); // recibir la contraseña 
 
         System.out.println(usuario);
         System.out.println(contrasena);
         //validar si el usuario se encuentra encuentra registrado  para iniciar seccion para ello se llama al metodo autenticarUsuario
 
         if (controladorDeUsuario.autenticarUsuario(usuario, contrasena)) {
-
-            request.setAttribute("usuario",usuario );
+            Usuario user = controladorDeUsuario.obtenerUsuarioPorCorreo(usuario);
+            request.getSession().setAttribute("usuario",user.getNombreUsuario() );
 
             System.out.println("El usuario a iniciado seccion");
             request.getRequestDispatcher("Principal.jsp").forward(request, response);// si el usuariio existe se redirecciona a la pagina Principal
