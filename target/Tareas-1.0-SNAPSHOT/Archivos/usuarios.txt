@@ -1,7 +1,6 @@
 1,quinonezjoiner@gmail.com,1234
 100,adrianangulo1080@gmail.com,1234
-<<<<<<< HEAD
 1080831081,accastillo222@umariana.edu.co,1234
-=======
 12345,esneyderibarra1970@gmail.com,323
->>>>>>> 83ce691657d53374d2104416d6a90d0381b4f979
+22,alejandroe.portilla221@umariana.edu.co,33
+34444,fdsfds@dsasda,33

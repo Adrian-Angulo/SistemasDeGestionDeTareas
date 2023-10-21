@@ -1,16 +1,13 @@
 <!-- Template Footer -->
 <!-- Añadir los import de bibliotecas y clases -->
-
-
 <!-- Enlazar archivos de BootStrap, establecer condiciones base y abrir etiquetas base -->
 <!-- Nombrar Proyecto -->
 <%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Tarea"%>
 <%@page import="Controlador.ControladorDeTareas"%>
-
 <%@page import="Controlador.ControladorDeUsuarios"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,13 +19,5 @@
         <!-- importacion del link de font awesome para los iconos -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-
-    </head>
-    
+    </head>   
     <body>  
-        
-       <% if (request.getAttribute("inicioSesionFallido") != null) { %>
-    <div class="alert alert-danger" role="alert">
-       Ups! parece que la cuenta no existe, verifica bien.
-    </div>
-<% } %>

@@ -44,3 +44,7 @@
     border-radius: 1px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
+    /*hace que el texto de la descripción se ajuste al siguiente renglón mostrando en la modal de buscar*/
+ #modalTaskDescription {
+            word-wrap: break-word;
+        }
