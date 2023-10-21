@@ -3,7 +3,7 @@ Este es un proyecto de aplicación web desarrollado en Java que permite a los us
 # Colaboradores
 - **Adrian Camilo Castillo Angulo**
 - **Esneyder Ibarra Rosero**
-- **Sofia burbano bastidas**
+- **Sofia Burbano Bastidas**
 
 # Uso
 ###  Registro de Usuarios
