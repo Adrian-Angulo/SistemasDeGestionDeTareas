@@ -308,6 +308,54 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 </script>
 
+<!-- este escript es para ordenar la lista por su fecha de vencimiento mas cercano-->
+<script>
+    $(document).ready(function () {
+        // Función para ordenar la tabla por fecha de vencimiento de manera ascendente
+        $("#ordenarPorFechaAscendente").click(function () {
+            var table = $("#tablaTareas");
+            var rows = table.find("tr").get();
+            rows.sort(function (a, b) {
+                var keyA = new Date($(a).children("td:eq(3)").text());
+                var keyB = new Date($(b).children("td:eq(3)").text());
+                return keyA - keyB;
+            });
+            $.each(rows, function (index, row) {
+                table.children("tbody").append(row);
+            });
+        });
+    });
+</script>
+<!-- este escript es para restablecer la tabla-->
+<script>
+    $(document).ready(function () {
+        // Variable para guardar el orden original de las filas
+        var originalTableOrder = [];
+
+        // Función para guardar el orden original de las filas
+        function guardarOrdenOriginal() {
+            originalTableOrder = $("#tablaTareas tbody tr").toArray();
+        }
+
+        // Función para restablecer el orden original de la tabla
+        function restablecerOrdenOriginal() {
+            $("#tablaTareas tbody").empty(); // Borra todas las filas actuales
+            $.each(originalTableOrder, function (index, row) {
+                $("#tablaTareas tbody").append(row); // Agrega las filas originales
+            });
+        }
+
+        // Llama a la función para guardar el orden original al cargar la página
+        guardarOrdenOriginal();
+
+        // Asocia la función de restablecimiento al botón de "Refrescar"
+        $("#refrescarTabla").click(function () {
+            restablecerOrdenOriginal();
+        });
+    });
+</script>
+
+
 <!-- este escript es para ordenar la lista de manera descendente en los ID's -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {

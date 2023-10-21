@@ -167,24 +167,34 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Ordenar
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <button id="ordenarPorIdAscendente" class="btn btn-link nav-link">Ascendente</button>
-                                    </li>
-                                    <!-- Botón de ordenamiento descendente -->
-                                    <li class="nav-item">
-                                        <button id="ordenarPorIdDescendente" class="btn btn-link nav-link">Descendente</button>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <ul class="dropdown-menu">
+    <li class="d-flex justify-content-center">
+        <button id="ordenarPorIdAscendente" class="btn btn-primary">Id Ascendente</button>
+    </li>
+    <li>
+        <hr class="dropdown-divider">
+    </li>
+    <!-- Botón de ordenamiento descendente -->
+    <li class="d-flex justify-content-center">
+        <button id="ordenarPorIdDescendente" class="btn btn-primary">Id Descendente</button>
+    </li>
+    <li>
+        <hr class="dropdown-divider">
+    </li>
+    <li class="d-flex justify-content-center">
+        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Ordenar por Fecha Ascendente</button>
+    </li>
+    <li>
+        <hr class="dropdown-divider">
+ <li class="d-flex justify-content-center">
+ <button id="refrescarTabla" class="btn btn-primary">Refrescar Tabla</button>
+ </li>
+
+</ul>
+
                         
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por nombre" aria-label="Search">
+                            <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por ID" aria-label="Search">
                             <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
                         </form>
                     </div>
