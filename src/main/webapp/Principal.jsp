@@ -9,7 +9,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary my-form2">
     <div style="font-family: 'Archivo Black';" class="container">
         <a class="navbar-brand"  href="#">Gestion de Tareas</a>
-        <div class="navbar bg-body-tertiary" id="navbarSupportedContent">
+        <div class="navbar bg-body-tertiary" id="navbarSupportedContent">           
+            <!-- opcion de salir o cerrar sesion -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown text-center">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,6 +25,7 @@
                     </ul>
                 </li>
             </ul>
+                    
         </div>
     </div>
 </nav>
@@ -98,11 +100,12 @@
                     </div>
 
                     <!-- Descripción -->
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Descripcion" name="descripcion" id="descripcion" style="width: 100%; max-width: 395px; height: 120px;" required></textarea>
+                    <div class="form-floating centered-textarea">
+                        <textarea class="form-control responsive-textarea" placeholder="Descripcion" name="descripcion" id="descripcion" style="height: 120px;" required></textarea>
                         <label for="descripcion">Descripcion</label>
-                        <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div>
-                    </div><br>
+                       
+                    </div>
+                     <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div><br>
 
                     <!-----fecha de vencimiento-->
                     <div class="input-group mb-3">
@@ -152,7 +155,7 @@
         <div style="font-family: 'Archivo Black';" class="col-md-8">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Listado de tareas</a>
+                    <a class="navbar-brand">Listado de tareas</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -162,11 +165,16 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    ordenar por
+                                    Ordenar
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li class="nav-item">
+                                        <button id="ordenarPorIdAscendente" class="btn btn-link nav-link">Ascendente</button>
+                                    </li>
+                                    <!-- Botón de ordenamiento descendente -->
+                                    <li class="nav-item">
+                                        <button id="ordenarPorIdDescendente" class="btn btn-link nav-link">Descendente</button>
+                                    </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -174,6 +182,7 @@
                                 </ul>
                             </li>
                         </ul>
+                        
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por nombre" aria-label="Search">
                             <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
@@ -181,8 +190,9 @@
                     </div>
                 </div>
             </nav>
+            
             <!-- Tabla donde se organizan las tareas -->
-            <table style="font-family: 'Archivo Black';" class="table table-hover table-listado">
+            <table style="font-family: 'Archivo Black';  " class="table table-hover table-listado" id="tablaTareas">
                 <!-- Titulos de la tabla -->
                 <thead>
                     <tr class="text-center">
@@ -233,7 +243,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p id="alertMessage"></p>
+                                <p style="color: red;" id="alertMessage"></p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Aceptar</button>
@@ -289,9 +299,13 @@
 
 
                 %>
-
-                <tr><% out.println("No hay perros");%> </tr>
-
+                <tr>
+                    <td>
+                        <div style='text-align: center;'>
+                <%out.println("No hay Tareas registradas");%>
+                        </div> 
+                    </td>
+                </tr>
                 <%    }
                 %>
                 </tbody> 
@@ -299,9 +313,5 @@
         </div>
     </div>  
 </div> 
-
-<script>
-
-</script>
 
 <%@include file="Templates/footer.jsp"%>

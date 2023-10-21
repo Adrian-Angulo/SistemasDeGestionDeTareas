@@ -289,6 +289,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
+<!-- este escript es para ordenar la lista de manera ascendente en los ID's -->
+<script>
+    $(document).ready(function () {
+        // Función para ordenar la tabla por ID de manera ascendente
+        $("#ordenarPorIdAscendente").click(function () {
+            var table = $("#tablaTareas");
+            var rows = table.find("tr").get();
+            rows.sort(function (a, b) {
+                var keyA = $(a).children("td:eq(0)").text();
+                var keyB = $(b).children("td:eq(0)").text();
+                return keyA - keyB;
+            });
+            $.each(rows, function (index, row) {
+                table.children("tbody").append(row);
+            });
+        });
+    });
+</script>
+
+<!-- este escript es para ordenar la lista de manera descendente en los ID's -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Función para ordenar la tabla por ID de manera descendente
+        function ordenarPorIdDescendente() {
+            var table = document.getElementById("tablaTareas").getElementsByTagName('tbody')[0];
+            var rows = Array.from(table.getElementsByTagName('tr'));
+
+            rows.sort(function(a, b) {
+                var idA = parseInt(a.cells[0].textContent.trim());
+                var idB = parseInt(b.cells[0].textContent.trim());
+                return idB - idA;
+            });
+
+            // Elimina las filas existentes
+            for (var i = 0; i < rows.length; i++) {
+                table.removeChild(rows[i]);
+            }
+
+            // Agrega las filas ordenadas
+            for (var i = 0; i < rows.length; i++) {
+                table.appendChild(rows[i]);
+            }
+        }
+
+        // Agrega un evento al botón "ordenarPorIdDescendente" para activar la función de ordenamiento
+        var ordenarPorIdDescendenteBtn = document.getElementById("ordenarPorIdDescendente");
+        ordenarPorIdDescendenteBtn.addEventListener("click", ordenarPorIdDescendente);
+    });
+</script>
+
+
+
 </footer>
 </body>
 </html>

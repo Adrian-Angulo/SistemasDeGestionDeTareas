@@ -47,4 +47,22 @@
     /*hace que el texto de la descripción se ajuste al siguiente renglón mostrando en la modal de buscar*/
  #modalTaskDescription {
             word-wrap: break-word;
-        }
+        }        
+        /* Estilo para centrar el textarea y hacerlo responsivo */
+.centered-textarea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilo para ajustar el ancho máximo del textarea */
+.responsive-textarea {
+    max-width: 100%;
+    width: 100%;
+}
+/* Estilo para centrar verticalmente el contenido de las celdas de la tabla */
+.table-listado tr td {
+    vertical-align: middle;
+}
+
