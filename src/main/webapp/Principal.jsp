@@ -25,7 +25,7 @@
                     </ul>
                 </li>
             </ul>
-                    
+
         </div>
     </div>
 </nav>
@@ -33,7 +33,71 @@
     <div class="row"> 
         <!-- clase division por 4 columnas -->
         <div class="col-md-4"> 
-           <!-- las siguientes alertas fueron ubicadas en este lugar para mostrarlas sobre el formulario de agregar tareas -->
+
+
+            <!-- alerta que se agrego una nueva tarea-->
+
+
+            <% if (request.getSession().getAttribute("alertaAgregar") != null && (boolean) request.getSession().getAttribute("alertaAgregar") == true) { %>
+            <div class="toast fade show  position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive"id="registroExitosoAlert" style="text-align: center; size: 28px">
+                <div class="toast-body">
+                    <label>Se agrego una nueva tarea</label>
+                </div>
+            </div>
+
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#registroExitosoAlert').alert('close');
+                }, 4000);
+            </script>
+            <% request.getSession().removeAttribute("alertaAgregar"); %>
+            <% } %>
+
+            <!-- alerta que se elimino una tarea-->
+
+
+            <% if (request.getSession().getAttribute("alertaEliminar") != null && (boolean) request.getSession().getAttribute("alertaEliminar") == true) { %>
+            <div class="toast fade show  position-fixed fixed-bottom fixed-left p-3" id="registroExitosoAlert" style="text-align: center; size: 28px">
+                <div class="toast-body">
+                    <label>Se elimino una tarea</label>
+                </div>
+            </div>
+
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#registroExitosoAlert').alert('close');
+                }, 4000);
+            </script>
+            <% request.getSession().removeAttribute("alertaEliminar"); %>
+            <% } %>
+
+
+            <!-- alerta que se edito una tarea-->
+
+
+            <% if (request.getSession().getAttribute("alertaEditar") != null && (boolean) request.getSession().getAttribute("alertaEditar") == true) { %>
+            <div class="toast fade show  position-fixed fixed-bottom fixed-left p-3" id="registroExitosoAlert" style="text-align: center; size: 28px">
+                <div class="toast-body">
+                    <label>Se edito una tarea</label>
+                </div>
+            </div>
+
+            <script>
+                // Ocultar la alerta después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    $('#registroExitosoAlert').alert('close');
+                }, 4000);
+            </script>
+            <% request.getSession().removeAttribute("alertaEditar"); %>
+            <% } %>
+
+
+
+
+
+            <!-- las siguientes alertas fueron ubicadas en este lugar para mostrarlas sobre el formulario de agregar tareas -->
             <!-- alerta para indicar que no se encontro la tarea para agregar otra tarea despues de ella-->
             <% if (request.getSession().getAttribute("alertaDespues") != null && (boolean) request.getSession().getAttribute("alertaDespues") == true) { %>
             <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
@@ -48,7 +112,11 @@
             <% request.getSession().removeAttribute("alertaDespues"); %>
             <% } %>
 
+
+
             <!-- alerta para indicar que no se puede registrar una tarea con un id existente-->
+
+
             <% if (request.getSession().getAttribute("alertaID") != null && (boolean) request.getSession().getAttribute("alertaID") == true) { %>
             <div class="alert alert-danger alert-dismissible fade show small-text" role="alert" id="registroExitosoAlert">
                 El ID que ha ingresado ya existe en nuestro sistema.
@@ -76,6 +144,8 @@
             <% request.getSession().removeAttribute("alertaIDnegativo"); %>
             <% } %>
 
+
+
             <div class="card card-body my-form">
                 <!-- tarjeta de trabajo -->
                 <h3 class="text-center">Agregar Tarea</h3>
@@ -88,9 +158,9 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Id</span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
-                       <!--<input type="text" name="id" placeholder="Id de la tarea" class="form-control" required><br>-->
-                       <input type="number" name="id" id="id" placeholder="Id de la tarea" class="form-control" required min="1">
-                       </div>
+                        <!--<input type="text" name="id" placeholder="Id de la tarea" class="form-control" required><br>-->
+                        <input type="number" name="id" id="id" placeholder="Id de la tarea" class="form-control" required min="1">
+                    </div>
                     <span id="idError" style="color: red; font-size: 13px;"></span>
                     <!-- Titulo -->
                     <div class="input-group mb-3">
@@ -103,9 +173,9 @@
                     <div class="form-floating centered-textarea">
                         <textarea class="form-control responsive-textarea" placeholder="Descripcion" name="descripcion" id="descripcion" style="height: 120px;" required></textarea>
                         <label for="descripcion">Descripcion</label>
-                       
+
                     </div>
-                     <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div><br>
+                    <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div><br>
 
                     <!-----fecha de vencimiento-->
                     <div class="input-group mb-3">
@@ -127,7 +197,7 @@
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="text" name="antes" class="form-control" placeholder="Titulo de tarea"><br>
                     </div>
-                    
+
                     <!-- inicio Bontones de agregar primero y ultimo -->
                     <div class="text-center" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="agregar" value="Primero" id="btnradio1" autocomplete="off">
@@ -135,7 +205,7 @@
 
                         <input type="radio" class="btn-check" name="agregar" value="Ultimo" id="btnradio2" autocomplete="off">
                         <label class="btn btn-outline" for="btnradio2">Agregar Ultimo</label>
-                    
+
                         <!-- icono para limpiar seleccion de botones si se desea  -->
                         <button type="button" class="btn btn-outline" id="limpiarSeleccion">
                             <i class="fas fa-times"></i>
@@ -163,36 +233,39 @@
                     <!-- nav bar para manejar botones  -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Ordenar
                                 </a>
-                            <ul class="dropdown-menu">
-    <li class="d-flex justify-content-center">
-        <button id="ordenarPorIdAscendente" class="btn btn-primary">Id Ascendente</button>
-    </li>
-    <li>
-        <hr class="dropdown-divider">
-    </li>
-    <!-- Botón de ordenamiento descendente -->
-    <li class="d-flex justify-content-center">
-        <button id="ordenarPorIdDescendente" class="btn btn-primary">Id Descendente</button>
-    </li>
-    <li>
-        <hr class="dropdown-divider">
-    </li>
-    <li class="d-flex justify-content-center">
-        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Ordenar por Fecha Ascendente</button>
-    </li>
-    <li>
-        <hr class="dropdown-divider">
- <li class="d-flex justify-content-center">
- <button id="refrescarTabla" class="btn btn-primary">Refrescar Tabla</button>
- </li>
+                                <ul class="dropdown-menu">
+                                    <li class="d-flex justify-content-center">
+                                        <button id="ordenarPorIdAscendente" class="btn btn-primary">Id Ascendente</button>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <!-- Botón de ordenamiento descendente -->
+                                    <li class="d-flex justify-content-center">
+                                        <button id="ordenarPorIdDescendente" class="btn btn-primary">Id Descendente</button>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li class="d-flex justify-content-center">
+                                        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Ordenar por Fecha Ascendente</button>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    <li class="d-flex justify-content-center">
+                                        <button id="refrescarTabla" class="btn btn-primary">Refrescar Tabla</button>
+                                    </li>
 
-</ul>
+                                </ul>
+                            </li>
+                        </ul>
 
-                        
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" id="searchInput" placeholder="Buscar por ID" aria-label="Search">
                             <button class="btn btn-outline-success" type="button" id="searchButton">Buscar</button>
@@ -200,19 +273,21 @@
                     </div>
                 </div>
             </nav>
-            
+
             <!-- Tabla donde se organizan las tareas -->
             <table style="font-family: 'Archivo Black';  " class="table table-hover table-listado" id="tablaTareas">
                 <!-- Titulos de la tabla -->
                 <thead>
                     <tr class="text-center">
-                <th><center>id</center></th>
+                        <th><center>id</center></th>
                 <th><center>Titulo</center></th>
                 <th><center>Descripción</center></th>
                 <th><center>Fecha de vencimiento</center></th>
                 <th><center>Acciones</center></th>
                 </tr>
                 </thead>
+                
+                
                 <!-- filas de la tabla a mostrar -->
                 <tbody>
                     <%
@@ -231,19 +306,19 @@
                     %>
                     <tr class="text-center">
                         <td><center><%out.println(t.getId());%></center></td>
-                        <td><center><div class="custom-name-cell"><%out.println(t.getTitulo());%></div></center></td>
-                        <td><center><div class="custom-description-cell"><%out.println(t.getDescripcion());%></div></center></td>
-                        <td><center><%out.println(t.getFechaDeVencimiento());%></center></td>
-                        <td>
-                            <center>
-                                <!-- Boton para Editar Tarea -->
-                                <a class="btn btn-outline-warning" data-bs-toggle="editar" data-bs-target="#editar"><i class="fa-solid fa-pen"></i></a>                                        
-                                <!-- Boton para Eliminar Tarea -->
-                                <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>                  
-                            </center>
-                       </td>
+                <td><center><div class="custom-name-cell"><%out.println(t.getTitulo());%></div></center></td>
+                <td><center><div class="custom-description-cell"><%out.println(t.getDescripcion());%></div></center></td>
+                <td><center><%out.println(t.getFechaDeVencimiento());%></center></td>
+                <td>
+                <center>
+                    <!-- Boton para Editar Tarea -->
+                     <a  class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-pen"></i></a>                                            
+                    <!-- Boton para Eliminar Tarea -->
+                    <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>                  
+                </center>
+                </td>
                 </tr>
-                         
+
                 <!-- Modal para mostrar la alerta -->
                 <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true" data-bs-backdrop="static">
                     <div class="modal-dialog" role="document">
@@ -283,6 +358,62 @@
                         </div>
                     </div>
                 </div>
+                                <!-- Modal para la Modificacion de una tarea -->
+
+                <div class="modal fade" id="editar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true" data-bs-backdrop="static">
+
+                    }
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="eliminarModalLabel">Editar Tarea</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="SvAgregarTareas" method="GET">
+
+                                    <!-- Id -->
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Id</span>
+                                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                                        <input type="text" name="id" placeholder="Id de la tarea" value="<%= t.getId()%>" class="form-control" required readonly><br>
+                                    </div>
+
+                                    <!-- Titulo -->
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Titulo</span>
+                                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                                        <input type="text" name="titulo" placeholder="Titulo de tu tarea" value="<%= t.getTitulo()%>" class="form-control" required><br>
+                                    </div>
+
+                                    <!-- Descripción -->
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Descripcion" name="descripcion"  id="descripcion" style="width: 100%; max-width: 395px; height: 120px;" required><%= t.getDescripcion()%></textarea>
+                                        <label for="descripcion">Descripcion</label>
+                                        <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div>
+                                    </div><br>
+
+                                    <!-----fecha de vencimiento-->
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Fecha de vencimiento</span>
+                                        <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
+                                        <input type="date" name="fecha" class="form-control" value="<%= t.getFechaDeVencimiento()%>"required><br>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <!-- Campo oculto para el tipo "Editar" -->
+                                        <input type="hidden" name="tipo" value="Editar">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> 
+                                        <!-- Agrega aquí un botón para realizar la eliminación -->
+                                        <button type="submit"  class="btn btn-success" data-bs-dismiss="modal">Editar</button> 
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Modal para la confirmacion de eliminar tarea -->
                 <div class="modal fade" id="eliminar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -307,12 +438,11 @@
                 <%                            }
                 } else {
 
-
                 %>
                 <tr>
                     <td>
                         <div style='text-align: center;'>
-                <%out.println("No hay Tareas registradas");%>
+                            <%out.println("No hay Tareas registradas");%>
                         </div> 
                     </td>
                 </tr>

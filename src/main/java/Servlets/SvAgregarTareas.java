@@ -56,17 +56,20 @@ public class SvAgregarTareas extends HttpServlet {
         ServletContext context = getServletContext();
 
         controlador.setListaTareas(archivos.leerListaTareas(context));
-        String id = request.getParameter("id");
-        String tipo = request.getParameter("tipo");
-        System.out.println("el id es" + id);
 
-        if (id != null && tipo != null) {
+        String tipo = request.getParameter("tipo");
+
+        System.out.println("el tipo es " + tipo);
+
+        if (tipo != null) {
             switch (tipo) {
                 case "Eliminar":
-                    if (controlador.eliminarTarea(Integer.parseInt(id))) {
-                        System.out.println("La tarea con id=" + id + " ha sido eliminada");
+                    String idEliminar = request.getParameter("id");
+                    if (controlador.eliminarTarea(Integer.parseInt(idEliminar))) {
+                        System.out.println("La tarea con id=" + idEliminar + " ha sido eliminada");
                         archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
                         response.sendRedirect("Principal.jsp");
+                        request.getSession().setAttribute("alertaEliminar", true);
                     } else {
                         System.out.println("no se pudo eliminar");
                         response.sendRedirect("Principal.jsp");
@@ -75,6 +78,22 @@ public class SvAgregarTareas extends HttpServlet {
                     break;
 
                 case "Editar":
+                    System.out.println("Entro en el editar");
+                    int idEditar = Integer.parseInt(request.getParameter("id").trim());
+                    String titulo = request.getParameter("titulo").trim();
+                    String descripcion = request.getParameter("descripcion");
+                    String fecha = request.getParameter("fecha");
+                    Tarea tarea = new Tarea(idEditar, titulo, descripcion, fecha);
+                    
+                    if(controlador.actualizarTarea(idEditar, tarea)){
+                        archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
+                        response.sendRedirect("Principal.jsp");
+                        request.getSession().setAttribute("alertaEditar", true);
+                        
+                    }else{
+                        System.out.println("no se puedo editar la tara");
+                    }
+
                     break;
 
             }
