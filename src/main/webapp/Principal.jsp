@@ -144,6 +144,9 @@
             <% request.getSession().removeAttribute("alertaIDnegativo"); %>
             <% } %>
 
+<div id="mensajeConfirmacion" style="display: none;" class="alert alert-success">
+  Tabla ordenada de manera descendente por ID.
+</div>
 
 
             <div class="card card-body my-form">
@@ -175,25 +178,25 @@
                         <label for="descripcion">Descripcion</label>
 
                     </div>
-                    <div class="wordCountMessage" id="wordCount" >Tienes un maximo de 20 palabras</div><br>
+                    <div class="wordCountMessage" id="wordCount" > Tienes un maximo de 20 palabras</div><br>
 
                     <!-----fecha de vencimiento-->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Fecha de vencimiento</span>
+                        <span class="input-group-text" id="basic-addon1"> Fecha de vencimiento</span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="date" name="fecha" class="form-control" required><br>
                     </div>
 
                     <!-----Agregar despues De una tarea-->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Agregar despues de</span>
+                        <span class="input-group-text" id="basic-addon1"> Agregar despues de </span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="text" name="despues" class="form-control" placeholder="Titulo de tarea"><br>
                     </div>
 
                     <!-----Agregar antes De una tarea-->
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Agregar Antes de</span>
+                        <span class="input-group-text" id="basic-addon1"> Agregar Antes de </span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
                         <input type="text" name="antes" class="form-control" placeholder="Titulo de tarea"><br>
                     </div>
@@ -201,10 +204,10 @@
                     <!-- inicio Bontones de agregar primero y ultimo -->
                     <div class="text-center" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="agregar" value="Primero" id="btnradio1" autocomplete="off">
-                        <label class="btn btn-outline" for="btnradio1">Agregar Primero</label>
+                        <label class="btn btn-outline" for="btnradio1"> Agregar de Primera </label>
 
                         <input type="radio" class="btn-check" name="agregar" value="Ultimo" id="btnradio2" autocomplete="off">
-                        <label class="btn btn-outline" for="btnradio2">Agregar Ultimo</label>
+                        <label class="btn btn-outline" for="btnradio2"> Agregar de Ultima </label>
 
                         <!-- icono para limpiar seleccion de botones si se desea  -->
                         <button type="button" class="btn btn-outline" id="limpiarSeleccion">
@@ -225,7 +228,7 @@
         <div style="font-family: 'Archivo Black';" class="col-md-8">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand">Listado de tareas</a>
+                    <a class="navbar-brand"> Lista de tareas </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -241,27 +244,34 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorIdAscendente" class="btn btn-primary">Id Ascendente</button>
+                                        <button id="ordenarPorIdAscendente" class="btn btn-primary">ID Ascendente</button>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <!-- Botón de ordenamiento descendente -->
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorIdDescendente" class="btn btn-primary">Id Descendente</button>
+                                        <button id="ordenarPorIdDescendente" class="btn btn-primary">ID Descendente</button>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Ordenar por Fecha Ascendente</button>
+                                        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Fecha Ascendente</button>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
+                                    </li>   
                                     <li class="d-flex justify-content-center">
-                                        <button id="refrescarTabla" class="btn btn-primary">Refrescar Tabla</button>
+                                        <button id="ordenarPorFechadescendente" class="btn btn-primary">Fecha Descendente</button>
                                     </li>
-
+                                     <li>
+                                        <hr class="dropdown-divider">
+                                    </li> 
+                                      <li class="d-flex justify-content-center">
+                                    <button id="recargarPagina" class="btn btn-primary">Restablecer</button>
+                                    </li>
+                                    
                                 </ul>
                             </li>
                         </ul>
@@ -273,21 +283,20 @@
                     </div>
                 </div>
             </nav>
-
             <!-- Tabla donde se organizan las tareas -->
             <table style="font-family: 'Archivo Black';  " class="table table-hover table-listado" id="tablaTareas">
-                <!-- Titulos de la tabla -->
-                <thead>
-                    <tr class="text-center">
-                        <th><center>id</center></th>
-                <th><center>Titulo</center></th>
-                <th><center>Descripción</center></th>
-                <th><center>Fecha de vencimiento</center></th>
-                <th><center>Acciones</center></th>
-                </tr>
-                </thead>
                 
-                
+               <!-- Títulos de la tabla -->
+    <thead>
+    <tr class="text-center">
+        <th><center>id</center></th>
+        <th><center>Titulo</center></th>
+        <th><center>Descripción</center></th>
+        <th><center>Fecha de vencimiento</center></th>
+        <th><center>Acciones</center></th>
+    </tr>
+    </thead>  
+
                 <!-- filas de la tabla a mostrar -->
                 <tbody>
                     <%

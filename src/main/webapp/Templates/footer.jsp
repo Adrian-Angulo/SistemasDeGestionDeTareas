@@ -1,6 +1,9 @@
 <!-- Template Footer -->
 <!-- Enlazar archivos de BootStrap y cerrar etiquetas base -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <footer>
     <!-- scripts usados para pagina index.jsp o login-->
     <!-- alerta o notificacion para indicar que el usuario ha sido guardado exitosamente-->
@@ -326,40 +329,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 </script>
-<!-- este escript es para restablecer la tabla-->
-<script>
-    $(document).ready(function () {
-        // Variable para guardar el orden original de las filas
-        var originalTableOrder = [];
-
-        // Función para guardar el orden original de las filas
-        function guardarOrdenOriginal() {
-            originalTableOrder = $("#tablaTareas tbody tr").toArray();
-        }
-
-        // Función para restablecer el orden original de la tabla
-        function restablecerOrdenOriginal() {
-            $("#tablaTareas tbody").empty(); // Borra todas las filas actuales
-            $.each(originalTableOrder, function (index, row) {
-                $("#tablaTareas tbody").append(row); // Agrega las filas originales
-            });
-        }
-
-        // Llama a la función para guardar el orden original al cargar la página
-        guardarOrdenOriginal();
-
-        // Asocia la función de restablecimiento al botón de "Refrescar"
-        $("#refrescarTabla").click(function () {
-            restablecerOrdenOriginal();
-        });
-    });
-</script>
-
-
-<!-- este escript es para ordenar la lista de manera descendente en los ID's -->
+<!-- este escript es para ordenar la lista de manera ascendente en los ID -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Función para ordenar la tabla por ID de manera descendente
+        // Función para ordenar la tabla por ID de manera ascendente
         function ordenarPorIdDescendente() {
             var table = document.getElementById("tablaTareas").getElementsByTagName('tbody')[0];
             var rows = Array.from(table.getElementsByTagName('tr'));
@@ -387,6 +360,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 </script>
 
+<!-- Este Script es para ordenar la tabla por fecha de manera descendente -->
+<script>
+    $(document).ready(function () {
+        $("#ordenarPorFechadescendente").click(function () {
+            // Obtén todas las filas de la tabla
+            var rows = $("#tablaTareas tbody tr").get();
+
+            // Ordena las tareas por fecha descendente
+            rows.sort(function (a, b) {
+                var dateA = new Date($(a).find("td:eq(3)").text());
+                var dateB = new Date($(b).find("td:eq(3)").text());
+                return dateB - dateA;
+            });
+
+            // Borra la fila actual
+            $("#tablaTareas tbody").empty();
+
+            // Agrega las filas ordenadas a la tabla nueva
+            $.each(rows, function (index, row) {
+                $("#tablaTareas tbody").append(row);
+            });
+        });
+    });
+</script>
+<!--este Script es para recargar la pagina -->
+<script>
+    
+    $(document).ready(function () {
+        // Al hacer clic en el botón "Recargar Página", la página se recargará con la tabla
+        $("#recargarPagina").click(function () {
+            location.reload();
+        });
+    });
+    
+</script>
 
 
 </footer>

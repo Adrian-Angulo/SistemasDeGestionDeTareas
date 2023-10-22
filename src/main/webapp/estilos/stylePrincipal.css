@@ -4,7 +4,84 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+} 
+/* Estilos para la tabla */
+.table-listado {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
+
+.table-listado th {
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.table-listado td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Estilos para las filas alternas */
+.table-listado tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para los botones en las celdas */
+.btn {
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Estilos para el encabezado de la tabla */
+.table-listado thead {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Estilos para los enlaces en las celdas */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para las alertas */
+.alert {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.alert-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 /*estilo mejorado para la celda del nombrem, le agrega "..." cuando se extiende el texto*/
 .custom-name-cell {
     max-width: 150px;
