@@ -8,7 +8,15 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary my-form2">
     <div style="font-family: 'Archivo Black';" class="container">
-        <a class="navbar-brand"  href="#">Gestion de Tareas</a>
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="Imagenes/portapapeles.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top">
+                Gestion de Tareas
+            </a>
+            
+        </div>
+
+
         <div class="navbar bg-body-tertiary" id="navbarSupportedContent">           
             <!-- opcion de salir o cerrar sesion -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -144,9 +152,9 @@
             <% request.getSession().removeAttribute("alertaIDnegativo"); %>
             <% } %>
 
-<div id="mensajeConfirmacion" style="display: none;" class="alert alert-success">
-  Tabla ordenada de manera descendente por ID.
-</div>
+            <div id="mensajeConfirmacion" style="display: none;" class="alert alert-success">
+                Tabla ordenada de manera descendente por ID.
+            </div>
 
 
             <div class="card card-body my-form">
@@ -191,14 +199,14 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"> Agregar despues de </span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
-                        <input type="text" name="despues" class="form-control" placeholder="Titulo de tarea"><br>
+                        <input type="text" id="despues" name="despues" class="form-control" placeholder="Titulo de tarea"><br>
                     </div>
 
                     <!-----Agregar antes De una tarea-->
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"> Agregar Antes de </span>
                         <!-- Aqui se obtiene el identificador unico, por lo que es necesario que al momento de presionar el boton de editar esta no se vuelva modificable -->
-                        <input type="text" name="antes" class="form-control" placeholder="Titulo de tarea"><br>
+                        <input type="text" id="antes" name="antes" class="form-control" placeholder="Titulo de tarea"><br>
                     </div>
 
                     <!-- inicio Bontones de agregar primero y ultimo -->
@@ -244,34 +252,35 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorIdAscendente" class="btn btn-primary">ID Ascendente</button>
+                                        <button id="ordenarPorIdAscendente" class="btn">ID Ascendente</button>
+
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <!-- Botón de ordenamiento descendente -->
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorIdDescendente" class="btn btn-primary">ID Descendente</button>
+                                        <button id="ordenarPorIdDescendente" class="btn">ID Descendente</button>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorFechaAscendente" class="btn btn-primary">Fecha Ascendente</button>
+                                        <button id="ordenarPorFechaAscendente" class="btn">Fecha Ascendente</button>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>   
                                     <li class="d-flex justify-content-center">
-                                        <button id="ordenarPorFechadescendente" class="btn btn-primary">Fecha Descendente</button>
+                                        <button id="ordenarPorFechadescendente" class="btn">Fecha Descendente</button>
                                     </li>
-                                     <li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li> 
-                                      <li class="d-flex justify-content-center">
-                                    <button id="recargarPagina" class="btn btn-primary">Restablecer</button>
+                                    <li class="d-flex justify-content-center">
+                                        <button id="recargarPagina" class="btn">Restablecer</button>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                         </ul>
@@ -284,31 +293,39 @@
                 </div>
             </nav>
             <!-- Tabla donde se organizan las tareas -->
+            <%
+                ServletContext context = getServletContext();
+
+                ControladorArchivos archivos = new ControladorArchivos();
+                ControladorDeTareas tareas = new ControladorDeTareas();
+
+                tareas.setListaTareas(archivos.leerListaTareas(context));
+                List<Tarea> listaTarea = tareas.obtenerTodasLasTareas();
+
+                int numeroDeTareas = listaTarea.size();
+
+            %>
+
+            <div class="text-center ">
+                <p class="fs-5">existen <%= numeroDeTareas%> tareas registradas</p>
+            </div>
+
             <table style="font-family: 'Archivo Black';  " class="table table-hover table-listado" id="tablaTareas">
-                
-               <!-- Títulos de la tabla -->
-    <thead>
-    <tr class="text-center">
-        <th><center>id</center></th>
-        <th><center>Titulo</center></th>
-        <th><center>Descripción</center></th>
-        <th><center>Fecha de vencimiento</center></th>
-        <th><center>Acciones</center></th>
-    </tr>
-    </thead>  
+
+                <!-- Títulos de la tabla -->
+                <thead>
+                    <tr class="text-center">
+                        <th><center>id</center></th>
+                <th><center>Titulo</center></th>
+                <th><center>Descripción</center></th>
+                <th><center>Fecha de vencimiento</center></th>
+                <th><center>Acciones</center></th>
+                </tr>
+                </thead>  
 
                 <!-- filas de la tabla a mostrar -->
                 <tbody>
-                    <%
-                        ServletContext context = getServletContext();
-
-                        ControladorArchivos archivos = new ControladorArchivos();
-                        ControladorDeTareas tareas = new ControladorDeTareas();
-
-                        tareas.setListaTareas(archivos.leerListaTareas(context));
-                        List<Tarea> listaTarea = tareas.obtenerTodasLasTareas();
-
-                        if (listaTarea != null && !listaTarea.isEmpty()) {
+                    <%                        if (listaTarea != null && !listaTarea.isEmpty()) {
 
                             for (Tarea t : listaTarea) {
 
@@ -321,7 +338,7 @@
                 <td>
                 <center>
                     <!-- Boton para Editar Tarea -->
-                     <a  class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-pen"></i></a>                                            
+                    <a  class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-pen"></i></a>                                            
                     <!-- Boton para Eliminar Tarea -->
                     <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>                  
                 </center>
@@ -362,12 +379,16 @@
                             </div>
 
                             <div class="modal-footer">
+                                <!-- Boton para Editar Tarea -->
+                                <a  class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-pen"></i></a>
+                                <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminar<%=t.getId()%>" data-nombre="<%=t.getTitulo()%>"><i class="fa-solid fa-trash"></i></a>
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                                <!-- Modal para la Modificacion de una tarea -->
+
+                <!-- Modal para la Modificacion de una tarea -->
 
                 <div class="modal fade" id="editar<%=t.getId()%>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true" data-bs-backdrop="static">
 

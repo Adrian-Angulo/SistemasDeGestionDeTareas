@@ -149,6 +149,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                     if (controlador.agregarTarea(tarea, agregar)) {
                         // Guardar la lista de tareas actualizada
                         archivos.guardarListaTareas(controlador.obtenerTodasLasTareas(), context);
+                        request.getSession().setAttribute("alertaAgregar", true);
                         System.out.println("La tarea se ha guardado exitosamente");
                     } else {
                         System.out.println("No se pudo guardar la tarea");

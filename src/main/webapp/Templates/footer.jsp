@@ -7,7 +7,7 @@
 <footer>
     <!-- scripts usados para pagina index.jsp o login-->
     <!-- alerta o notificacion para indicar que el usuario ha sido guardado exitosamente-->
-    
+
     <!-- inicio de scripts o alertas para la clase index.jsp o login-->       
     <script>
         // Ocultar la alerta después de 4 segundos 
@@ -160,29 +160,29 @@
             }
         };
     </script>
-        <!-- este script sirve para que la contraseña sea segura y contega usabilidad-->
+    <!-- este script sirve para que la contraseña sea segura y contega usabilidad-->
     <script>
-    function validarContraseña() {
-        var contraseña = document.getElementById("contrasenaInput2").value;
-        var longitudMinima = 8;
-        var contieneMayuscula = /[A-Z]/.test(contraseña);
-        var contieneMinuscula = /[a-z]/.test(contraseña);
-        var contieneNumero = /\d/.test(contraseña);
+        function validarContraseña() {
+            var contraseña = document.getElementById("contrasenaInput2").value;
+            var longitudMinima = 8;
+            var contieneMayuscula = /[A-Z]/.test(contraseña);
+            var contieneMinuscula = /[a-z]/.test(contraseña);
+            var contieneNumero = /\d/.test(contraseña);
 
-        if (
-            contraseña.length < longitudMinima ||
-            !contieneMayuscula ||
-            !contieneMinuscula ||
-            !contieneNumero
-        ) {
-            document.getElementById("errorMensaje").textContent = "La contraseña debe tener al menos una letra MAYUSCULA y/o simbolos";
-            return false;
+            if (
+                    contraseña.length < longitudMinima ||
+                    !contieneMayuscula ||
+                    !contieneMinuscula ||
+                    !contieneNumero
+                    ) {
+                document.getElementById("errorMensaje").textContent = "La contraseña debe tener al menos una letra MAYUSCULA y/o simbolos";
+                return false;
+            }
+
+            document.getElementById("errorMensaje").textContent = "";
+            return true;
         }
-
-        document.getElementById("errorMensaje").textContent = "";
-        return true;
-    }
-</script>
+    </script>
 
 
     <!-- scripts de la clase pincipal.jsp-->
@@ -226,199 +226,256 @@
             }
         });
     </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Función para mostrar una alerta en la modal de alerta
-        function showAlert(message) {
-            // Actualizar el contenido de la modal de alerta con el mensaje
-            $("#alertMessage").text(message);
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Función para mostrar una alerta en la modal de alerta
+            function showAlert(message) {
+                // Actualizar el contenido de la modal de alerta con el mensaje
+                $("#alertMessage").text(message);
 
-            // Mostrar la modal de alerta
-            $("#alertModal").modal("show");
-        }
+                // Mostrar la modal de alerta
+                $("#alertModal").modal("show");
+            }
 
-        // Función para realizar la búsqueda y mostrar la información en la modal de detalles
-        $("#searchButton").click(function () {
-            var searchTerm = $("#searchInput").val().trim();
-            if (searchTerm !== "") {
-                // Realizar la búsqueda de la tarea por ID
-                var taskIdToSearch = parseInt(searchTerm); // Convierte el valor a número si es un entero
-                if (!isNaN(taskIdToSearch) && taskIdToSearch > 0) {
-                    var taskFound = false;
-                    $(".custom-name-cell").each(function () {
-                        var taskId = parseInt($(this).closest("tr").find("td:first-child").text());
-                        if (taskId === taskIdToSearch) {
-                            taskFound = true;
-                            var taskTitle = $(this).text();
-                            var taskDescription = $(this).closest("tr").find(".custom-description-cell").text();
-                            var taskDueDate = $(this).closest("tr").find("td:nth-child(4)").text();
+            // Función para realizar la búsqueda y mostrar la información en la modal de detalles
+            $("#searchButton").click(function () {
+                var searchTerm = $("#searchInput").val().trim();
+                if (searchTerm !== "") {
+                    // Realizar la búsqueda de la tarea por ID
+                    var taskIdToSearch = parseInt(searchTerm); // Convierte el valor a número si es un entero
+                    if (!isNaN(taskIdToSearch) && taskIdToSearch > 0) {
+                        var taskFound = false;
+                        $(".custom-name-cell").each(function () {
+                            var taskId = parseInt($(this).closest("tr").find("td:first-child").text());
+                            if (taskId === taskIdToSearch) {
+                                taskFound = true;
+                                var taskTitle = $(this).text();
+                                var taskDescription = $(this).closest("tr").find(".custom-description-cell").text();
+                                var taskDueDate = $(this).closest("tr").find("td:nth-child(4)").text();
 
-                            // Actualizar el contenido de la modal de detalles con los detalles de la tarea
-                            $("#modalTaskId").text(taskId);
-                            $("#modalTaskTitle").text(taskTitle);
-                            $("#modalTaskDescription").text(taskDescription);
-                            $("#modalTaskDueDate").text(taskDueDate);
+                                // Actualizar el contenido de la modal de detalles con los detalles de la tarea
+                                $("#modalTaskId").text(taskId);
+                                $("#modalTaskTitle").text(taskTitle);
+                                $("#modalTaskDescription").text(taskDescription);
+                                $("#modalTaskDueDate").text(taskDueDate);
 
-                            // Mostrar la modal de detalles
-                            $("#taskModal").modal("show");
-                            return false;
+                                // Mostrar la modal de detalles
+                                $("#taskModal").modal("show");
+                                return false;
+                            }
+                        });
+
+                        if (!taskFound) {
+                            showAlert("No se encontró una tarea con el ID proporcionado.");
                         }
-                    });
-
-                    if (!taskFound) {
-                        showAlert("No se encontró una tarea con el ID proporcionado.");
+                    } else {
+                        showAlert("El ID ingresado no es válido. Por favor, ingrese un número entero válido mayor que cero.");
                     }
                 } else {
-                    showAlert("El ID ingresado no es válido. Por favor, ingrese un número entero válido mayor que cero.");
+                    showAlert("Ingrese un ID para buscar la tarea.");
                 }
-            } else {
-                showAlert("Ingrese un ID para buscar la tarea.");
-            }
+            });
         });
-    });
-</script>
+    </script>
 
 
     <!-- este script hace que el se muestre un texto en el input del id de manera que no se exceda un id de 3 digitos y-->   
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var idInput = document.getElementById("id");
-  var idError = document.getElementById("idError");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var idInput = document.getElementById("id");
+            var idError = document.getElementById("idError");
 
-  idInput.addEventListener("input", function() {
-    if (idInput.value.length > 3) {
-      idError.textContent = "El ID no puede exceder los 3 dígitos";
-      idError.style.color = "red";
-      idInput.setCustomValidity("El ID no puede exceder los 3 dígitos");
-    } else {
-      idError.textContent = "";
-      idError.style.color = "red";
-      idInput.setCustomValidity("");
-    }
-  });
-});
-</script>
-
-<!-- este script permite realizar el desmarque de los botones de agregar primero y ultimo -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const btnRadio1 = document.getElementById("btnradio1");
-    const btnRadio2 = document.getElementById("btnradio2");
-    const limpiarSeleccion = document.getElementById("limpiarSeleccion");
-
-        limpiarSeleccion.addEventListener("click", function () {
-        btnRadio1.checked = false;
-        btnRadio2.checked = false;
-    });
-});
-
-</script>
-
-<!-- este escript es para ordenar la lista de manera ascendente en los ID's -->
-<script>
-    $(document).ready(function () {
-        // Función para ordenar la tabla por ID de manera ascendente
-        $("#ordenarPorIdAscendente").click(function () {
-            var table = $("#tablaTareas");
-            var rows = table.find("tr").get();
-            rows.sort(function (a, b) {
-                var keyA = $(a).children("td:eq(0)").text();
-                var keyB = $(b).children("td:eq(0)").text();
-                return keyA - keyB;
-            });
-            $.each(rows, function (index, row) {
-                table.children("tbody").append(row);
+            idInput.addEventListener("input", function () {
+                if (idInput.value.length > 3) {
+                    idError.textContent = "El ID no puede exceder los 3 dígitos";
+                    idError.style.color = "red";
+                    idInput.setCustomValidity("El ID no puede exceder los 3 dígitos");
+                } else {
+                    idError.textContent = "";
+                    idError.style.color = "red";
+                    idInput.setCustomValidity("");
+                }
             });
         });
-    });
-</script>
+    </script>
 
-<!-- este escript es para ordenar la lista por su fecha de vencimiento mas cercano-->
-<script>
-    $(document).ready(function () {
-        // Función para ordenar la tabla por fecha de vencimiento de manera ascendente
-        $("#ordenarPorFechaAscendente").click(function () {
-            var table = $("#tablaTareas");
-            var rows = table.find("tr").get();
-            rows.sort(function (a, b) {
-                var keyA = new Date($(a).children("td:eq(3)").text());
-                var keyB = new Date($(b).children("td:eq(3)").text());
-                return keyA - keyB;
-            });
-            $.each(rows, function (index, row) {
-                table.children("tbody").append(row);
+    <!-- este script permite realizar el desmarque de los botones de agregar primero y ultimo -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnRadio1 = document.getElementById("btnradio1");
+            const btnRadio2 = document.getElementById("btnradio2");
+            const antes = document.getElementById('antes');
+            const despues = document.getElementById('despues');
+            const limpiarSeleccion = document.getElementById("limpiarSeleccion");
+
+            limpiarSeleccion.addEventListener("click", function () {
+                btnRadio1.checked = false;
+                btnRadio2.checked = false;
+                antes.disabled = false;
+                despues.disabled = false;
             });
         });
-    });
-</script>
-<!-- este escript es para ordenar la lista de manera ascendente en los ID -->
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Función para ordenar la tabla por ID de manera ascendente
-        function ordenarPorIdDescendente() {
-            var table = document.getElementById("tablaTareas").getElementsByTagName('tbody')[0];
-            var rows = Array.from(table.getElementsByTagName('tr'));
 
-            rows.sort(function(a, b) {
-                var idA = parseInt(a.cells[0].textContent.trim());
-                var idB = parseInt(b.cells[0].textContent.trim());
-                return idB - idA;
+    </script>
+
+    <!-- este escript es para ordenar la lista de manera ascendente en los ID's -->
+    <script>
+        $(document).ready(function () {
+            // Función para ordenar la tabla por ID de manera ascendente
+            $("#ordenarPorIdAscendente").click(function () {
+                var table = $("#tablaTareas");
+                var rows = table.find("tr").get();
+                rows.sort(function (a, b) {
+                    var keyA = $(a).children("td:eq(0)").text();
+                    var keyB = $(b).children("td:eq(0)").text();
+                    return keyA - keyB;
+                });
+                $.each(rows, function (index, row) {
+                    table.children("tbody").append(row);
+                });
             });
+        });
+    </script>
 
-            // Elimina las filas existentes
-            for (var i = 0; i < rows.length; i++) {
-                table.removeChild(rows[i]);
+    <!-- este escript es para ordenar la lista por su fecha de vencimiento mas cercano-->
+    <script>
+        $(document).ready(function () {
+            // Función para ordenar la tabla por fecha de vencimiento de manera ascendente
+            $("#ordenarPorFechaAscendente").click(function () {
+                var table = $("#tablaTareas");
+                var rows = table.find("tr").get();
+                rows.sort(function (a, b) {
+                    var keyA = new Date($(a).children("td:eq(3)").text());
+                    var keyB = new Date($(b).children("td:eq(3)").text());
+                    return keyA - keyB;
+                });
+                $.each(rows, function (index, row) {
+                    table.children("tbody").append(row);
+                });
+            });
+        });
+    </script>
+    <!-- este escript es para ordenar la lista de manera ascendente en los ID -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Función para ordenar la tabla por ID de manera ascendente
+            function ordenarPorIdDescendente() {
+                var table = document.getElementById("tablaTareas").getElementsByTagName('tbody')[0];
+                var rows = Array.from(table.getElementsByTagName('tr'));
+
+                rows.sort(function (a, b) {
+                    var idA = parseInt(a.cells[0].textContent.trim());
+                    var idB = parseInt(b.cells[0].textContent.trim());
+                    return idB - idA;
+                });
+
+                // Elimina las filas existentes
+                for (var i = 0; i < rows.length; i++) {
+                    table.removeChild(rows[i]);
+                }
+
+                // Agrega las filas ordenadas
+                for (var i = 0; i < rows.length; i++) {
+                    table.appendChild(rows[i]);
+                }
             }
 
-            // Agrega las filas ordenadas
-            for (var i = 0; i < rows.length; i++) {
-                table.appendChild(rows[i]);
+            // Agrega un evento al botón "ordenarPorIdDescendente" para activar la función de ordenamiento
+            var ordenarPorIdDescendenteBtn = document.getElementById("ordenarPorIdDescendente");
+            ordenarPorIdDescendenteBtn.addEventListener("click", ordenarPorIdDescendente);
+        });
+    </script>
+
+    <!-- Este Script es para ordenar la tabla por fecha de manera descendente -->
+    <script>
+        $(document).ready(function () {
+            $("#ordenarPorFechadescendente").click(function () {
+                // Obtén todas las filas de la tabla
+                var rows = $("#tablaTareas tbody tr").get();
+
+                // Ordena las tareas por fecha descendente
+                rows.sort(function (a, b) {
+                    var dateA = new Date($(a).find("td:eq(3)").text());
+                    var dateB = new Date($(b).find("td:eq(3)").text());
+                    return dateB - dateA;
+                });
+
+                // Borra la fila actual
+                $("#tablaTareas tbody").empty();
+
+                // Agrega las filas ordenadas a la tabla nueva
+                $.each(rows, function (index, row) {
+                    $("#tablaTareas tbody").append(row);
+                });
+            });
+        });
+    </script>
+    <!--este Script es para recargar la pagina -->
+    <script>
+
+        $(document).ready(function () {
+            // Al hacer clic en el botón "Recargar Página", la página se recargará con la tabla
+            $("#recargarPagina").click(function () {
+                location.reload();
+            });
+        });
+
+    </script>
+
+    <!----------------desabilitar campos de agregar primero o despues------------------------->
+    <script>
+        const antes = document.getElementById('antes');
+        const despues = document.getElementById('despues');
+        const primero = document.getElementById('btnradio2');
+        const ultimo = document.getElementById('btnradio1');
+
+        antes.addEventListener('input', () => {
+            despues.disabled = true;
+            primero.disabled = true;
+            ultimo.disabled = true;
+
+            // Habilitar el input 2 si el input 1 está vacío
+            if (antes.value === '') {
+                despues.disabled = false;
+                primero.disabled = false;
+                ultimo.disabled = false;
             }
-        }
-
-        // Agrega un evento al botón "ordenarPorIdDescendente" para activar la función de ordenamiento
-        var ordenarPorIdDescendenteBtn = document.getElementById("ordenarPorIdDescendente");
-        ordenarPorIdDescendenteBtn.addEventListener("click", ordenarPorIdDescendente);
-    });
-</script>
-
-<!-- Este Script es para ordenar la tabla por fecha de manera descendente -->
-<script>
-    $(document).ready(function () {
-        $("#ordenarPorFechadescendente").click(function () {
-            // Obtén todas las filas de la tabla
-            var rows = $("#tablaTareas tbody tr").get();
-
-            // Ordena las tareas por fecha descendente
-            rows.sort(function (a, b) {
-                var dateA = new Date($(a).find("td:eq(3)").text());
-                var dateB = new Date($(b).find("td:eq(3)").text());
-                return dateB - dateA;
-            });
-
-            // Borra la fila actual
-            $("#tablaTareas tbody").empty();
-
-            // Agrega las filas ordenadas a la tabla nueva
-            $.each(rows, function (index, row) {
-                $("#tablaTareas tbody").append(row);
-            });
         });
-    });
-</script>
-<!--este Script es para recargar la pagina -->
-<script>
-    
-    $(document).ready(function () {
-        // Al hacer clic en el botón "Recargar Página", la página se recargará con la tabla
-        $("#recargarPagina").click(function () {
-            location.reload();
+
+        despues.addEventListener('input', () => {
+            antes.disabled = true;
+            primero.disabled = true;
+            ultimo.disabled = true;
+            // Habilitar el input 2 si el input 1 está vacío
+            if (despues.value === '') {
+                antes.disabled = false;
+                primero.disabled = false;
+                ultimo.disabled = false;
+            }
         });
-    });
-    
-</script>
+
+        primero.addEventListener('click', () => {
+            antes.disabled = true;
+            despues.disabled = true;
+        });
+        primero.addEventListener('change', () => {
+            if (!primero.checked) {
+                antes.disabled = false;
+                despues.disabled = false;
+            }
+        });
+
+        ultimo.addEventListener('click', () => {
+            antes.disabled = true;
+            despues.disabled = true;
+        });
+
+
+
+
+    </script>
 
 
 </footer>
