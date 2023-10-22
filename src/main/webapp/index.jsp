@@ -25,6 +25,7 @@
 <% request.removeAttribute("inicioSesionFallido"); %>  
 <% }%>
 
+    
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <!-- Formulario para Registrarse si eres nuevo -->
@@ -42,13 +43,15 @@
             
             <div class="input-group">
                 <input type="password" placeholder="Contraseña" name="contrasena" id="contrasenaInput2" required/>
+               
                 <div class="input-group-append2">
                     <button class="btn btn-outline-secondary p-1" type="button" id="togglePassword2">
                         <i class="far fa-eye-slash" id="eyeIcon2"></i>
                     </button>
                 </div>
             </div>
-            <button type="submit">Registrar</button>
+             <span id="errorMensaje" style="color: red;"></span>
+          <button type="submit" onclick="return validarContraseña();">Registrar</button>
         </form>
         <!------------------------------------------>
     </div>    

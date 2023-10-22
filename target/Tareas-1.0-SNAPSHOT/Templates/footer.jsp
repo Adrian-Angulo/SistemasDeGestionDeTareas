@@ -160,6 +160,30 @@
             }
         };
     </script>
+        <!-- este script sirve para que la contraseña sea segura y contega usabilidad-->
+    <script>
+    function validarContraseña() {
+        var contraseña = document.getElementById("contrasenaInput2").value;
+        var longitudMinima = 8;
+        var contieneMayuscula = /[A-Z]/.test(contraseña);
+        var contieneMinuscula = /[a-z]/.test(contraseña);
+        var contieneNumero = /\d/.test(contraseña);
+
+        if (
+            contraseña.length < longitudMinima ||
+            !contieneMayuscula ||
+            !contieneMinuscula ||
+            !contieneNumero
+        ) {
+            document.getElementById("errorMensaje").textContent = "La contraseña debe tener al menos una letra MAYUSCULA y/o simbolos";
+            return false;
+        }
+
+        document.getElementById("errorMensaje").textContent = "";
+        return true;
+    }
+</script>
+
 
     <!-- scripts de la clase pincipal.jsp-->
     <!-- este script no permite que la tecla enter funcione dentro del textarea para evitar error en agregar tarea-->
