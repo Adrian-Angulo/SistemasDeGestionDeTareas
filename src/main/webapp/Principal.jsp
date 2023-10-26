@@ -9,8 +9,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary my-form2">
     <div style="font-family: 'Archivo Black';" class="container">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="Imagenes/portapapeles.png" alt="Logo" width="50" height="30" class="d-inline-block align-text-top">
+            <a class="navbar-brand">
+                <img src="Imagenes/portapapeles.png" alt="Logo" width="60" height="40" class="d-inline-block align-text-top">
                 Gestion de Tareas
             </a>
             
